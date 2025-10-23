@@ -4,9 +4,9 @@ import Layout from '@layouts/Layout.astro';
 
 <Layout title='Cintillo Banner - Contador'>
 	<div class="h-20 bg-white">
-    <div class="w-full relative py-2.5 overflow-hidden bg-white" id="banner_cintillo"
+    <div class="w-full relative py-7 overflow-hidden banner_cintillo_cyber" id="banner_cintillo"
       data-date-init="Set 8, 2025, 9:00:00 AM Central Daylight Time"
-      data-date-end="Oct 23, 2025, 12:02:00 PM Central Daylight Time">
+      data-date-end="Oct 23, 2025, 14:02:00 PM Central Daylight Time">
       
       <div class="w-full max-w-[1240px] mx-auto flex justify-center sm:w-[96%]">
         <!-- <a class="absolute top-0 left-0 z-1 w-full h-full opacity-0 cursor-pointer" 
@@ -23,7 +23,7 @@ import Layout from '@layouts/Layout.astro';
                  class="block h-auto self-center max-sm:max-w-[80px]">
           </div>
           
-          <!-- Sección del contador -->
+          <!-- Sección del Cintillo contador -->
           <div class="flex justify-center md:mx-auto items-center flex-col md:flex-row countdown_section">
             <div class="pr-5 md:pr-[15px] max-sm:pr-0 max-sm:mx-auto max-sm:mb-[4.5px] max-sm:pl-2.5">
               <h3 class="font-amx-regular text-sm md:text-lg leading-none">
@@ -78,6 +78,13 @@ import Layout from '@layouts/Layout.astro';
               </dl>
             </div>
           </div>
+					<!-- Fin Cintillo contador -->
+
+					<!-- Contenido de Cintillo Cyber -->
+					<div class="flex justify-center md:mx-auto items-center flex-col md:flex-row cyber_section">
+						<p class="text-sm md:text-lg xl:text-xl font-amx-medium">Descuentos en equipos, promos y más del 14 al 17 de Julio.</p>
+					</div>
+					<!-- Fin Contenido de Cintillo Cyber -->
           
           <!-- Botón de ver más -->
           <div class="grow-0 flex lg:pl-[1%] md:pr-[5%]">
@@ -113,16 +120,23 @@ import Layout from '@layouts/Layout.astro';
       }
     }
 		#banner_cintillo{
+			--countdown-bg-color: white;
 			--countdown-text-color: #DA291C;
 			--countdown-btn-bg-color: #DA291C;
 			--countdown-btn-text-color: #FFFFFF;
 			--countdown-close-color: #5f5e5e;
+			background-color: var(--countdown-bg-color);
 		}
     #banner_cintillo .countdown_section{
 			& h3{
 				color: var(--countdown-text-color);
 			}
 			& h4{
+				color: var(--countdown-text-color);
+			}
+		}
+    #banner_cintillo .cyber_section{
+			& p{
 				color: var(--countdown-text-color);
 			}
 		}
@@ -168,24 +182,30 @@ import Layout from '@layouts/Layout.astro';
 
 <script>
   import { parseFechaCMS, startCountdown } from '@/utils/countdown.js';
-
+	const CONTADOR_ACTIVO = false;
   // Configuration
-  const bannerId = 'banner_cintillo';
   const limitDesktop = 100;
   const limitMobile = 70;
 
   // Obtener elementos
-  const counterElement = document.querySelector(`#banner_cintillo`) as HTMLElement;
-  const closeElement = document.querySelector(`.closeElement`) as HTMLElement;
-  
-  if (!counterElement) {
-    console.error(`Banner element with id "${bannerId}" not found`);
+  const banner_cintillo = document.querySelector(`#banner_cintillo`) as HTMLElement;
+  const banner_contador = banner_cintillo.querySelector(`.countdown_section`) as HTMLElement;
+  const banner_cyber = banner_cintillo.querySelector(`.cyber_section`) as HTMLElement;
+  const closeElement = banner_cintillo.querySelector(`.closeElement`) as HTMLElement;
+  if (CONTADOR_ACTIVO) {
+		banner_contador?.classList.remove('hidden');
+		banner_cyber?.classList.add('hidden');
+	} else {
+		banner_contador?.classList.add('hidden');
+		banner_cyber?.classList.remove('hidden');
+	}
+	
+  if (!banner_cintillo) {
+    console.error(`Banner cintillo no encontrado`);
   } else {
-    const limit = window.matchMedia("(max-width: 541px)").matches ? limitMobile : limitDesktop;
-
     // Obtener fechas a partir de atributos de datos
-    const counterDateInit = counterElement.getAttribute('data-date-init');
-    const counterDateEnd = counterElement.getAttribute('data-date-end');
+    const counterDateInit = banner_cintillo.getAttribute('data-date-init');
+    const counterDateEnd = banner_cintillo.getAttribute('data-date-end');
     
     const now = new Date();
     const dateInit = parseFechaCMS(counterDateInit);
@@ -212,32 +232,35 @@ import Layout from '@layouts/Layout.astro';
       targetDate = dateEnd;
       shouldShow = true;
     } else {
-      // Terminó
+      // Terminó - usar dateEnd para mostrar el contador en 00:00:00
+      targetDate = dateEnd;
       shouldShow = isDevelopMode;
     }
 
     // Mostrar/ocultar banner y iniciar conteo
-    if (shouldShow) {
-      counterElement.style.display = 'block';
-      startCountdown(targetDate);
+    if (shouldShow && targetDate) {
+      banner_cintillo.style.display = 'block';
+			if (banner_contador) {
+				startCountdown(targetDate);
+			}
     } else {
-      counterElement.style.display = 'none';
+      banner_cintillo.style.display = 'none';
     }
-
-    // Comportamiento sticky al desplazarse
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > limit) {
-        counterElement.classList.add('sticky');
-      } else {
-        counterElement.classList.remove('sticky');
-      }
-    });
-
-    // Botón de cierre
-    if (closeElement) {
-      closeElement.addEventListener('click', function() {
-        counterElement.remove();
-      });
-    }
+		const limit = window.matchMedia("(max-width: 541px)").matches ? limitMobile : limitDesktop;
+		// Comportamiento sticky al desplazarse
+		window.addEventListener('scroll', function() {
+			if (window.scrollY > limit) {
+				banner_cintillo?.classList.add('sticky');
+			} else {
+				banner_cintillo?.classList.remove('sticky');
+			}
+		});
+	
+		// Botón de cierre
+		if (closeElement) {
+			closeElement.addEventListener('click', function() {
+				banner_cintillo?.remove();
+			});
+		}
   }
 </script>
