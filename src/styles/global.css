@@ -1,6 +1,5 @@
 @import "tailwindcss" important;
 
-
 @font-face {
   font-family: "AMX Black";
   src: url("https://www.claro.com.pe/assets/havas/general/fonts/AMX-Black.woff2?") format("eot"), url("https://www.claro.com.pe/assets/havas/general/fonts/AMX-Black.woff2") format("woff2"), url("https://www.claro.com.pe/assets/havas/general/fonts/AMX-Black.woff") format("woff"), url("https://www.claro.com.pe/assets/havas/general/fonts/AMX-Black.woff2") format("truetype");
