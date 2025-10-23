@@ -6,7 +6,7 @@ import Layout from '@layouts/Layout.astro';
 	<div class="h-20 bg-white">
     <div class="w-full relative py-2.5 overflow-hidden bg-white" id="banner_cintillo"
       data-date-init="Set 8, 2025, 9:00:00 AM Central Daylight Time"
-      data-date-end="Nov 9, 2025, 06:30:00 PM Central Daylight Time">
+      data-date-end="Oct 23, 2025, 12:02:00 PM Central Daylight Time">
       
       <div class="w-full max-w-[1240px] mx-auto flex justify-center sm:w-[96%]">
         <!-- <a class="absolute top-0 left-0 z-1 w-full h-full opacity-0 cursor-pointer" 
@@ -14,7 +14,7 @@ import Layout from '@layouts/Layout.astro';
            target="_blank"></a> -->
         
         <div class="w-full max-w-[1000px] flex gap-4 md:gap-10 justify-center items-center relative">
-          <!-- Header with logo -->
+          <!-- Header con logo -->
           <div class="flex grow-0">
             <img src="https://test-claro-pe.prod.clarodigital.net/portal/pe/recursos_contenido/135a9f3f-b876-4a00-9651-61e4a9822f6b-peru_ecuador.png" 
                  alt="CYBER WOW" 
@@ -23,10 +23,10 @@ import Layout from '@layouts/Layout.astro';
                  class="block h-auto self-center max-sm:max-w-[80px]">
           </div>
           
-          <!-- Main countdown section -->
-          <div class="flex justify-center md:mx-auto items-center flex-col md:flex-row">
+          <!-- Sección del contador -->
+          <div class="flex justify-center md:mx-auto items-center flex-col md:flex-row countdown_section">
             <div class="pr-5 md:pr-[15px] max-sm:pr-0 max-sm:mx-auto max-sm:mb-[4.5px] max-sm:pl-2.5">
-              <h3 class="font-amx-regular text-sm text-claro md:text-lg leading-none">
+              <h3 class="font-amx-regular text-sm md:text-lg leading-none">
                 Empieza en:
               </h3>
             </div>
@@ -34,8 +34,8 @@ import Layout from '@layouts/Layout.astro';
             <div class="flex flex-wrap h-fit pt-1 md:pt-0" id="countdown">
               <!-- Days -->
               <dl class="flex flex-wrap h-fit">
-                <dt data-top="DÍA" class="flex flex-wrap relative h-fit after:content-[attr(data-top)] after:font-amx-regular after:text-[6px] after:block after:pt-2.5 after:pl-0.5 after:-mr-1.5 after:text-claro max-sm:after:pt-0 max-sm:after:mt-0 max-sm:after:text-[5px] max-sm:after:-mr-3">
-                  <h4 class="font-amx-black text-[22px] text-claro leading-normal h-fit md:text-[36px] max-sm:leading-[25px]">
+                <dt data-top="DÍA" class="flex flex-wrap relative h-fit after:content-[attr(data-top)] after:font-amx-regular after:text-[6px] after:block after:pt-2.5 after:pl-0.5 after:-mr-1.5  max-sm:after:pt-0 max-sm:after:mt-0 max-sm:after:text-[5px] max-sm:after:-mr-3">
+                  <h4 class="font-amx-black text-[22px] leading-normal h-fit md:text-[36px] max-sm:leading-[25px]">
                     <span class="dia_digito1"></span><span class="dia_digito2"></span>
                   </h4>
                 </dt>
@@ -46,8 +46,8 @@ import Layout from '@layouts/Layout.astro';
               
               <!-- Hours -->
               <dl class="flex flex-wrap h-fit">
-                <dt data-top="HORAS" class="flex flex-wrap relative h-fit after:content-[attr(data-top)] after:font-amx-regular after:text-[6px] after:block after:pt-2.5 after:pl-0.5 after:-mr-1.5 after:text-claro max-sm:after:pt-0 max-sm:after:mt-0 max-sm:after:text-[5px] max-sm:after:-mr-3">
-                  <h4 class="font-amx-black text-[22px] text-claro leading-normal h-fit md:text-[36px] max-sm:leading-[25px]">
+                <dt data-top="HORAS" class="flex flex-wrap relative h-fit after:content-[attr(data-top)] after:font-amx-regular after:text-[6px] after:block after:pt-2.5 after:pl-0.5 after:-mr-1.5  max-sm:after:pt-0 max-sm:after:mt-0 max-sm:after:text-[5px] max-sm:after:-mr-3">
+                  <h4 class="font-amx-black text-[22px] leading-normal h-fit md:text-[36px] max-sm:leading-[25px]">
                     <span class="hora_digito1"></span><span class="hora_digito2"></span>
                   </h4>
                 </dt>
@@ -58,8 +58,8 @@ import Layout from '@layouts/Layout.astro';
               
               <!-- Minutes -->
               <dl class="flex flex-wrap h-fit">
-                <dt data-top="MIN" class="flex flex-wrap relative h-fit after:content-[attr(data-top)] after:font-amx-regular after:text-[6px] after:block after:pt-2.5 after:pl-0.5 after:-mr-1.5 after:text-claro max-sm:after:pt-0 max-sm:after:mt-0 max-sm:after:text-[5px] max-sm:after:-mr-3">
-                  <h4 class="font-amx-black text-[22px] text-claro leading-normal h-fit md:text-[36px] max-sm:leading-[25px]">
+                <dt data-top="MIN" class="flex flex-wrap relative h-fit after:content-[attr(data-top)] after:font-amx-regular after:text-[6px] after:block after:pt-2.5 after:pl-0.5 after:-mr-1.5  max-sm:after:pt-0 max-sm:after:mt-0 max-sm:after:text-[5px] max-sm:after:-mr-3">
+                  <h4 class="font-amx-black text-[22px] leading-normal h-fit md:text-[36px] max-sm:leading-[25px]">
                     <span class="minuto_digito1"></span><span class="minuto_digito2"></span>
                   </h4>
                 </dt>
@@ -70,8 +70,8 @@ import Layout from '@layouts/Layout.astro';
               
               <!-- Seconds -->
               <dl class="flex-wrap h-fit hidden md:flex">
-                <dt data-top="SEG" class="flex flex-wrap relative h-fit after:content-[attr(data-top)] after:font-amx-regular after:text-[6px] after:block after:pt-2.5 after:pl-0.5 after:-mr-1.5 after:text-claro max-sm:after:pt-0 max-sm:after:mt-0 max-sm:after:text-[5px] max-sm:after:-mr-3">
-                  <h4 class="font-amx-black text-[22px] text-claro leading-normal h-fit md:text-[36px] max-sm:leading-[25px]">
+                <dt data-top="SEG" class="flex flex-wrap relative h-fit after:content-[attr(data-top)] after:font-amx-regular after:text-[6px] after:block after:pt-2.5 after:pl-0.5 after:-mr-1.5  max-sm:after:pt-0 max-sm:after:mt-0 max-sm:after:text-[5px] max-sm:after:-mr-3">
+                  <h4 class="font-amx-black text-[22px] leading-normal h-fit md:text-[36px] max-sm:leading-[25px]">
                     <span class="segundo_digito1"></span><span class="segundo_digito2"></span>
                   </h4>
                 </dt>
@@ -79,17 +79,17 @@ import Layout from '@layouts/Layout.astro';
             </div>
           </div>
           
-          <!-- Footer button -->
+          <!-- Botón de ver más -->
           <div class="grow-0 flex lg:pl-[1%] md:pr-[5%]">
             <a href="#" 
                target="_blank"
-               class="font-amx-black text-[16px] bg-claro text-white leading-10 table rounded-[20px] self-center px-4 hover:bg-claro-dark md:text-[15px] md:leading-9 max-sm:text-[11px] max-sm:px-2.5 max-sm:leading-[30px]">
+               class="font-amx-black text-[16px] leading-10 table rounded-[20px] self-center px-4 md:text-[15px] md:leading-9 max-sm:text-[11px] max-sm:px-2.5 max-sm:leading-[30px] view_more_btn">
               <span class="table-cell">Ver más</span>
             </a>
           </div>
           
-          <!-- Close button -->
-          <a class="absolute top-0 right-1 h-full flex justify-center items-center pointer-events-auto z-2 cursor-pointer lg:-right-[4%] md:right-0"  id="closeElement">
+          <!-- Botón de cierre -->
+          <a class="absolute top-0 right-1 h-full flex justify-center items-center z-2 cursor-pointer lg:-right-[4%] md:right-0 closeElement">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M17 1L1 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M1 1L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -112,7 +112,27 @@ import Layout from '@layouts/Layout.astro';
         padding-top: 96px;
       }
     }
-
+		#banner_cintillo{
+			--countdown-text-color: #DA291C;
+			--countdown-btn-bg-color: #DA291C;
+			--countdown-btn-text-color: #FFFFFF;
+			--countdown-close-color: #5f5e5e;
+		}
+    #banner_cintillo .countdown_section{
+			& h3{
+				color: var(--countdown-text-color);
+			}
+			& h4{
+				color: var(--countdown-text-color);
+			}
+		}
+    #banner_cintillo .view_more_btn{
+			background-color: var(--countdown-btn-bg-color);
+			color: var(--countdown-btn-text-color);
+		}
+    #banner_cintillo .closeElement{
+			color: var(--countdown-close-color);
+		}
     #banner_cintillo.sticky {
       position: fixed;
       top: 55px;
@@ -146,198 +166,78 @@ import Layout from '@layouts/Layout.astro';
   </style>
 
 
-<script is:inline src="https://static.claro.com.pe/landings/havas/2023/contador-sorteos/v1/js/library/jquery.countdown.js"></script>
+<script>
+  import { parseFechaCMS, startCountdown } from '@/utils/countdown.js';
 
-  <script is:inline type="text/javascript">
-    function parseFechaCMS(str) {
-      // Example format: "Sep 2, 2025, 12:00:00 AM Central Daylight Time"
-      // This function parses the string and creates a Date object.
-      // It manually parses the string to avoid browser inconsistencies with new Date().
-      // It assumes "Central Daylight Time" (CDT) is UTC-5, which is the same as Peru time (PET).
+  // Configuration
+  const bannerId = 'banner_cintillo';
+  const limitDesktop = 100;
+  const limitMobile = 70;
 
-      const partes = str.match(/([A-Za-z]+) (\d{1,2}), (\d{4}), (\d{1,2}):(\d{2}):(\d{2}) ([AP]M)/);
+  // Obtener elementos
+  const counterElement = document.querySelector(`#banner_cintillo`) as HTMLElement;
+  const closeElement = document.querySelector(`.closeElement`) as HTMLElement;
+  
+  if (!counterElement) {
+    console.error(`Banner element with id "${bannerId}" not found`);
+  } else {
+    const limit = window.matchMedia("(max-width: 541px)").matches ? limitMobile : limitDesktop;
 
-      if (!partes) {
-        console.error("Fecha inválida (formato no reconocido):", str);
-        // As a fallback, try direct parsing, but it may be inconsistent.
-        const d = new Date(str);
-        return isNaN(d) ? null : d;
-      }
-
-      const [, mesStr, dia, anio, horaRaw, min, seg, ampm] = partes;
-
-      const meses = {
-        // English
-        Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
-        Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11,
-        // Spanish
-        Ene: 0, Abr: 3, Ago: 7, Set: 8, Dic: 11
-      };
-
-      const mes = meses[mesStr.slice(0, 3)];
-      if (typeof mes === 'undefined') {
-          console.error("Mes inválido:", mesStr);
-          return null;
-      }
-      
-      let hora = parseInt(horaRaw, 10);
-
-      if (ampm === 'PM' && hora !== 12) {
-        hora += 12;
-      }
-      if (ampm === 'AM' && hora === 12) {
-        hora = 0; // 12 AM is midnight (00:00)
-      }
-
-      // The input date has a timezone like "Central Daylight Time" (CDT), which is UTC-5.
-      // We will create a Date object representing this specific point in time.
-      // By creating a UTC date and adding 5 hours, we are converting from UTC-5 to UTC.
-      // For example, 9:00 AM CDT (UTC-5) is 14:00 in UTC.
-      // hora(9) + 5 = 14. This is correct.
-      const fechaUTC = new Date(Date.UTC(
-          parseInt(anio, 10), 
-          mes, 
-          parseInt(dia, 10), 
-          hora + 5, // Compensate for UTC-5 (CDT) to get the correct UTC time
-          parseInt(min, 10), 
-          parseInt(seg, 10)
-      ));
-
-      return fechaUTC;
-    }
-    var closeElement$ = "#closeElement";
-    var counterElement$ = "#banner_cintillo";
-    var limitDesktop = 100;
-    var limitMobile = 70;
-    var counterDateInit = $(counterElement$).attr('data-date-init'); // Fecha inicio del objetivo
-    var counterDateEnd = $(counterElement$).attr('data-date-end'); // Fecha fin del objetivo
-    var titleSelector = '.banner_cintillo__main__title h3';
+    // Obtener fechas a partir de atributos de datos
+    const counterDateInit = counterElement.getAttribute('data-date-init');
+    const counterDateEnd = counterElement.getAttribute('data-date-end');
     
-    if (window.matchMedia("(max-width: 541px)").matches) {
-      var limit = limitMobile;
-    } else {
-      var limit = limitDesktop;
-    }
-    
-    var now = new Date();
-    var dateInit = parseFechaCMS(counterDateInit);
+    const now = new Date();
+    const dateInit = parseFechaCMS(counterDateInit);
     console.log({dateInit});
-    //Puedes mostramre la hora loca lde dataInit
     console.log(dateInit.toLocaleString());
-    var dateEnd = parseFechaCMS(counterDateEnd);
+    
+    const dateEnd = parseFechaCMS(counterDateEnd);
     console.log({dateEnd});
-    //Puedes mostramre la hora loca lde dataEnd
     console.log(dateEnd.toLocaleString());
-    var targetDate;
-    var titleText = '';
+    
+    let targetDate;
+    let shouldShow = false;
 
+    // Verificar si IS_DEVELOP está definido globalmente
+    const isDevelopMode = typeof (window as any).IS_DEVELOP !== 'undefined' && (window as any).IS_DEVELOP;
+		console.log( { isDevelopMode} )
+    // Lógica de negocio: determinar si el banner debe mostrarse y qué fecha contar
     if (now < dateInit) {
       // Antes de iniciar
       targetDate = dateInit;
-      // titleText = 'Empieza en:';
-      if (typeof IS_DEVELOP !== 'undefined' && IS_DEVELOP){
-        $(counterElement$).css("display", "block");
-      }else{
-        $(counterElement$).css("display", "none");
-      }
+      shouldShow = isDevelopMode;
     } else if (now >= dateInit && now < dateEnd) {
       // En curso
       targetDate = dateEnd;
-      // titleText = 'Termina en:';
-      $(counterElement$).css("display", "block");
+      shouldShow = true;
     } else {
       // Terminó
-      if (typeof IS_DEVELOP !== 'undefined' && IS_DEVELOP){
-        $(counterElement$).css("display", "block");
-      }else{
-        $(counterElement$).css("display", "none");
+      shouldShow = isDevelopMode;
+    }
+
+    // Mostrar/ocultar banner y iniciar conteo
+    if (shouldShow) {
+      counterElement.style.display = 'block';
+      startCountdown(targetDate);
+    } else {
+      counterElement.style.display = 'none';
+    }
+
+    // Comportamiento sticky al desplazarse
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > limit) {
+        counterElement.classList.add('sticky');
+      } else {
+        counterElement.classList.remove('sticky');
       }
-    }
-
-    // Cambia el texto del título dinámicamente
-    // if (titleText !== '') {
-    //   $(titleSelector).text(titleText);
-    // }
-
-    // Iniciar la cuenta regresiva solo si está visible
-    if ($(counterElement$).css("display") !== "none") {
-      $("#countdown")
-        .countdown(targetDate)
-        .on("update.countdown", function (event) {
-          var $this = $(this);
-
-          var td = event.offset.totalDays;
-          var d0 = 0,
-            d1 = td;
-          if (td > 9) {
-            var d = td.toString().split("");
-            d0 = d[0];
-            d1 = d[1];
-          }
-
-          var th = event.offset.hours;
-          var h0 = 0,
-            h1 = th;
-          if (th > 9) {
-            var h = th.toString().split("");
-            h0 = h[0];
-            h1 = h[1];
-          }
-
-          var tm = event.offset.minutes;
-          var m0 = 0,
-            m1 = tm;
-          if (tm > 9) {
-            var m = tm.toString().split("");
-            m0 = m[0];
-            m1 = m[1];
-          }
-
-          var ts = event.offset.seconds;
-          var s0 = 0,
-            s1 = ts;
-          if (ts > 9) {
-            var s = ts.toString().split("");
-            s0 = s[0];
-            s1 = s[1];
-          }
-
-          $this.find("span.dia_digito1").html(d0);
-          $this.find("span.dia_digito2").html(d1);
-
-          $this.find("span.hora_digito1").html(h0);
-          $this.find("span.hora_digito2").html(h1);
-
-          $this.find("span.minuto_digito1").html(m0);
-          $this.find("span.minuto_digito2").html(m1);
-
-          $this.find("span.segundo_digito1").html(s0);
-          $this.find("span.segundo_digito2").html(s1);
-        })
-        .on("finish.countdown", function () {
-          var $this = $(this);
-          $this.find("span.dia_digito1").html("0");
-          $this.find("span.dia_digito2").html("0");
-          $this.find("span.hora_digito1").html("0");
-          $this.find("span.hora_digito2").html("0");
-          $this.find("span.minuto_digito1").html("0");
-          $this.find("span.minuto_digito2").html("0");
-          $this.find("span.segundo_digito1").html("0");
-          $this.find("span.segundo_digito2").html("0");
-        });
-    }
-
-    window.onload = function () {
-      $(window).scroll(function () {
-        if ($(this).scrollTop() > limit) {
-          $(counterElement$).addClass("sticky");
-        } else {
-          $(counterElement$).removeClass("sticky");
-        }
-      });
-    };
-    $(closeElement$).click(function () {
-      $(counterElement$).remove();
     });
 
-  </script>
+    // Botón de cierre
+    if (closeElement) {
+      closeElement.addEventListener('click', function() {
+        counterElement.remove();
+      });
+    }
+  }
+</script>
