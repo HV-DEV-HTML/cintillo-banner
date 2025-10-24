@@ -111,17 +111,27 @@ export function updateCountdown(targetDate) {
 /**
  * Start countdown interval
  * @param {Date} targetDate - Target date for countdown
+ * @param {Function} onFinish - Optional callback to execute when countdown reaches 0
  * @returns {number} - Interval ID that can be used to stop the countdown
  */
-export function startCountdown(targetDate) {
+export function startCountdown(targetDate, onFinish) {
   // Initial update
-  updateCountdown(targetDate);
+  const initialShouldContinue = updateCountdown(targetDate);
+  
+  // If countdown is already finished, call the callback immediately
+  if (!initialShouldContinue && typeof onFinish === 'function') {
+    onFinish();
+  }
   
   // Start countdown interval
   const intervalId = setInterval(function() {
     const shouldContinue = updateCountdown(targetDate);
     if (!shouldContinue) {
       clearInterval(intervalId);
+      // Execute callback when countdown finishes
+      if (typeof onFinish === 'function') {
+        onFinish();
+      }
     }
   }, 1000);
   

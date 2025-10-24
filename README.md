@@ -87,11 +87,12 @@ El proyecto estará disponible en `http://localhost:4321`
 
 ### Variables Globales
 
-En `src/layouts/Layout.astro` se definen las variables globales:
+En `src/pages/index.astro` se definen las variables globales:
 
 ```javascript
-window.IS_DEVELOP = true;        // Modo desarrollo (muestra banner siempre)
-window.CONTADOR_ACTIVO = true;   // true: Modo Contador | false: Modo Cyber
+window.IS_DEVELOP = true;              // Modo desarrollo (muestra banner siempre)
+window.CONTADOR_ACTIVO = true;         // true: Modo Contador | false: Modo Cyber
+window.SHOWCYBERTOFINISHED = true;     // true: Muestra contenido cyber al terminar el contador
 ```
 
 ### Configuración de Build
@@ -235,11 +236,14 @@ Actualiza el DOM con los valores del contador regresivo.
 updateCountdown(new Date('2025-12-31'));
 ```
 
-#### `startCountdown(targetDate)`
-Inicia el intervalo del contador y retorna el ID del intervalo.
+#### `startCountdown(targetDate, onFinish)`
+Inicia el intervalo del contador y retorna el ID del intervalo. Acepta un callback opcional que se ejecuta cuando el contador llega a 0.
 
 ```javascript
-const intervalId = startCountdown(targetDate);
+const intervalId = startCountdown(targetDate, () => {
+  console.log('¡Contador terminado!');
+  // Ejecutar acciones al finalizar
+});
 ```
 
 ### Lógica de Negocio (`index.astro`)
@@ -268,11 +272,19 @@ if (now < dateInit) {
 - Muestra el contador regresivo
 - Oculta el contenido cyber
 - Actualiza cada segundo
+- Si `SHOWCYBERTOFINISHED = true`, automáticamente cambia al modo cyber cuando el contador llega a 0
 
 #### Modo Cyber (`CONTADOR_ACTIVO = false`)
 - Oculta el contador
 - Muestra contenido estático
 - No ejecuta el contador
+
+#### Transición Automática
+Cuando `SHOWCYBERTOFINISHED = true` y el contador llega a 0:
+- Se oculta el contador
+- Se muestra el contenido cyber
+- Se oculta el logo del banner
+- Se agrega la clase `cyber` al banner
 
 ## 📝 Notas Importantes
 
@@ -282,9 +294,11 @@ if (now < dateInit) {
 
 3. **Modo Desarrollo**: Cuando `IS_DEVELOP = true`, el banner siempre es visible (útil para pruebas)
 
-4. **Assets Path**: Asegúrate de que el `assetsPrefix` en `astro.config.mjs` apunte a la URL correcta del servidor
+4. **Transición Automática**: Cuando `SHOWCYBERTOFINISHED = true`, el banner cambia automáticamente del modo contador al modo cyber cuando el tiempo llega a 0
 
-5. **Cache**: Después de actualizar los assets, puede ser necesario limpiar el caché del navegador
+5. **Assets Path**: Asegúrate de que el `assetsPrefix` en `astro.config.mjs` apunte a la URL correcta del servidor
+
+6. **Cache**: Después de actualizar los assets, puede ser necesario limpiar el caché del navegador
 
 ## 🐛 Troubleshooting
 
