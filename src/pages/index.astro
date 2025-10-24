@@ -4,8 +4,8 @@ import Layout from '@layouts/Layout.astro';
 
 <Layout title='Cintillo Banner - Contador'>
 	<div class="w-full relative py-7 overflow-hidden" id="banner_cintillo"
-		data-date-init="Oct 10, 2025, 12:15:00 AM Central Daylight Time"
-		data-date-end="Oct 24, 2025, 11:37:00 AM Central Daylight Time"
+		data-date-init="Oct 24, 2025, 4:58:00 PM Central Standard Time"
+		data-date-end="Oct 24, 2025, 5:53:00 PM Central Standard Time"
 		style="display: none;"
 		>
 		<picture class="w-full h-full object-cover absolute top-0 left-0 z-0 bg_banner">
@@ -209,7 +209,7 @@ import Layout from '@layouts/Layout.astro';
 </style>
 
 <script is:inline>
-	window.IS_DEVELOP = true;
+	window.IS_DEVELOP = false;
 	window.CONTADOR_ACTIVO = true;
 	window.SHOWCYBERTOFINISHED = true;
 </script>
@@ -275,6 +275,9 @@ import Layout from '@layouts/Layout.astro';
       // Terminó - usar dateEnd para mostrar el contador en 00:00:00
       targetDate = dateEnd;
       shouldShow = isDevelopMode;
+			if (SHOWCYBERTOFINISHED){
+				shouldShow = true;
+			}
     }
 
     // Mostrar/ocultar banner y iniciar conteo
