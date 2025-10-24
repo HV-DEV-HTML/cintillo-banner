@@ -4,8 +4,8 @@ import Layout from '@layouts/Layout.astro';
 
 <Layout title='Cintillo Banner - Contador'>
 	<div class="w-full relative py-7 overflow-hidden" id="banner_cintillo"
-		data-date-init="Oct 24, 2025, 4:58:00 PM Central Standard Time"
-		data-date-end="Oct 24, 2025, 5:53:00 PM Central Standard Time"
+		data-date-init="Oct 24, 2025, 5:05:00 PM Central Standard Time"
+		data-date-end="Oct 24, 2025, 5:06:00 PM Central Standard Time"
 		style="display: none;"
 		>
 		<picture class="w-full h-full object-cover absolute top-0 left-0 z-0 bg_banner">
@@ -209,9 +209,9 @@ import Layout from '@layouts/Layout.astro';
 </style>
 
 <script is:inline>
-	window.IS_DEVELOP = false;
+	window.IS_DEVELOP = true;
 	window.CONTADOR_ACTIVO = true;
-	window.SHOWCYBERTOFINISHED = true;
+	window.SHOWCYBERTOFINISHED = false;
 </script>
 <script>
   import { parseFechaCMS, startCountdown } from '@/utils/countdown.js';
@@ -266,7 +266,36 @@ import Layout from '@layouts/Layout.astro';
     if (now < dateInit) {
       // Antes de iniciar
       targetDate = dateInit;
-      shouldShow = isDevelopMode;
+      shouldShow = isDevelopMode; // Solo mostrar inmediatamente si está en modo desarrollo
+      
+      // Programar mostrar el banner cuando dateInit entre en vigencia
+      const timeUntilStart = dateInit.getTime() - now.getTime();
+      setTimeout(() => {
+        // Mostrar el banner cuando llegue dateInit
+        banner_cintillo.removeAttribute('style');
+        
+        // Cambiar a modo contador activo
+        if (CONTADOR_ACTIVO) {
+          banner_contador?.classList.remove('hidden');
+          banner_cyber?.classList.add('hidden');
+          logo_banner?.classList.remove('hidden');
+          logo_banner?.classList.add('flex');
+        }
+        
+        // Iniciar el countdown hacia dateEnd
+        if (banner_contador) {
+          startCountdown(dateEnd, () => {
+            // Callback que se ejecuta cuando el contador llega a 0
+            if (SHOWCYBERTOFINISHED) {
+              banner_cintillo.classList.add('cyber');
+              banner_contador?.classList.add('hidden');
+              banner_cyber?.classList.remove('hidden');
+              logo_banner?.classList.add('hidden');
+              logo_banner?.classList.remove('flex');
+            }
+          });
+        }
+      }, timeUntilStart);
     } else if (now >= dateInit && now < dateEnd) {
       // En curso
       targetDate = dateEnd;
@@ -275,8 +304,8 @@ import Layout from '@layouts/Layout.astro';
       // Terminó - usar dateEnd para mostrar el contador en 00:00:00
       targetDate = dateEnd;
       shouldShow = isDevelopMode;
-			if (SHOWCYBERTOFINISHED){
-				shouldShow = true;
+			if (SHOWCYBERTOFINISHED && !isDevelopMode){
+				shouldShow = SHOWCYBERTOFINISHED;
 			}
     }
 
