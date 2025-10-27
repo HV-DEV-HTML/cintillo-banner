@@ -1,7 +1,7 @@
 [Plugin:ifInRange from="[PageInfo value='firstItemOnPage']"]
-<link rel="stylesheet" href="https://www.claro.com.pe/assets/havas/banner_cintillo/_assets/index.CRkwAt9L.css">
+<link rel="stylesheet" href="https://www.claro.com.pe/assets/havas/banner_cintillo/_assets/index.7U2dxzBb.css">
 <div
-  class="w-full relative py-7 overflow-hidden"
+  class="w-full relative py-4 overflow-hidden"
   id="banner_cintillo"
   data-date-init="[Element context='autofill' type='content' key='AT.FieldDate']"
   data-date-end="[Element context='autofill' type='content' key='AT.FieldDateEnd']"
@@ -17,7 +17,7 @@
     <div class="w-full max-w-[1000px] flex gap-4 md:gap-10 justify-center items-center relative z-10">
       <!-- Header con logo -->
       <div class="grow-0 hidden md:flex logo_banner">
-        <picture class="block h-auto self-center max-w-[74px] md:max-w-[140px]">
+        <picture class="block h-auto self-center max-w-[74px] md:max-w-[120px]">
           [Element context="autofill" type="content" key="AT.FieldImage" htmlencode="false"]
         </picture>
       </div>
