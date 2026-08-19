@@ -1,19 +1,21 @@
 /**
  * Parse a date string in CMS format
  * Example: "Sep 2, 2025, 12:00:00 AM Central Daylight Time"
- * @param {string} str - Date string to parse
+ * @param {unknown} str - Date string to parse
  * @returns {Date|null} - Parsed date or null if invalid
  */
 export function parseFechaCMS(str) {
-  const partes = str.match(/([A-Za-z]+) (\d{1,2}), (\d{4}), (\d{1,2}):(\d{2}):(\d{2}) ([AP]M)/);
+	if (typeof str !== 'string' || str.trim() === '') {
+		return null;
+	}
+
+	const partes = str.trim().match(/^([A-Za-z]+) (\d{1,2}), (\d{4}), (\d{1,2}):(\d{2}):(\d{2}) ([AP]M)(?: .*)?$/);
 
   if (!partes) {
-    console.error("Fecha inválida (formato no reconocido):", str);
-    const d = new Date(str);
-    return isNaN(d) ? null : d;
+		return null;
   }
 
-  const [, mesStr, dia, anio, horaRaw, min, seg, ampm] = partes;
+	const [, mesStr, diaRaw, anioRaw, horaRaw, minRaw, segRaw, ampm] = partes;
 
   const meses = {
     // English
@@ -25,11 +27,21 @@ export function parseFechaCMS(str) {
 
   const mes = meses[mesStr.slice(0, 3)];
   if (typeof mes === 'undefined') {
-    console.error("Mes inválido:", mesStr);
     return null;
   }
+
+	const dia = parseInt(diaRaw, 10);
+	const anio = parseInt(anioRaw, 10);
+	const min = parseInt(minRaw, 10);
+	const seg = parseInt(segRaw, 10);
+	const hora12 = parseInt(horaRaw, 10);
+	const diasEnMes = new Date(Date.UTC(anio, mes + 1, 0)).getUTCDate();
+
+	if (dia < 1 || dia > diasEnMes || hora12 < 1 || hora12 > 12 || min > 59 || seg > 59) {
+		return null;
+	}
   
-  let hora = parseInt(horaRaw, 10);
+	let hora = hora12;
 
   if (ampm === 'PM' && hora !== 12) {
     hora += 12;
@@ -40,12 +52,12 @@ export function parseFechaCMS(str) {
 
   // Compensate for UTC-5 (CDT) to get the correct UTC time
   const fechaUTC = new Date(Date.UTC(
-    parseInt(anio, 10), 
+		anio,
     mes, 
-    parseInt(dia, 10), 
+		dia,
     hora + 5,
-    parseInt(min, 10), 
-    parseInt(seg, 10)
+		min,
+		seg
   ));
 
   return fechaUTC;
@@ -70,7 +82,7 @@ export function updateCountdown(targetDate) {
   const now = new Date().getTime();
   const distance = targetDate.getTime() - now;
 
-  if (distance < 0) {
+  if (distance <= 0) {
     // Countdown finished - set all to zero
     document.querySelector('.dia_digito1').textContent = '0';
     document.querySelector('.dia_digito2').textContent = '0';
@@ -112,7 +124,7 @@ export function updateCountdown(targetDate) {
  * Start countdown interval
  * @param {Date} targetDate - Target date for countdown
  * @param {Function} onFinish - Optional callback to execute when countdown reaches 0
- * @returns {number} - Interval ID that can be used to stop the countdown
+ * @returns {number|null} - Interval ID that can be used to stop the countdown
  */
 export function startCountdown(targetDate, onFinish) {
   // Initial update
@@ -122,7 +134,11 @@ export function startCountdown(targetDate, onFinish) {
   if (!initialShouldContinue && typeof onFinish === 'function') {
     onFinish();
   }
-  
+
+	if (!initialShouldContinue) {
+		return null;
+	}
+
   // Start countdown interval
   const intervalId = setInterval(function() {
     const shouldContinue = updateCountdown(targetDate);
