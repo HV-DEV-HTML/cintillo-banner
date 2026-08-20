@@ -63,9 +63,6 @@ import offerImage from '@/assets/oferta_img.png';
 							</div>
 						</div>
 
-						<div class="cyber_section hidden">
-							<p>Descuentos en equipos, promos y más.</p>
-						</div>
 					</div>
 				</section>
 
@@ -100,505 +97,11 @@ import offerImage from '@/assets/oferta_img.png';
 	</div>
 </Layout>
 
-<style is:inline>
-	#banner_cintillo {
-		--campaign-panel-color:#0433FF;
-		--campaign-panel-accent: #021F99;
-		--offer-panel-color: #ffffff;
-		--offer-text-color: #202124;
-		--cta-color: #da291c;
-		--countdown-close-color: black;
-		position: relative;
-		width: 100%;
-		height: 70px;
-		overflow: hidden;
-		font-family: "Roboto", sans-serif;
-	}
-
-	.toolbar-opened .stControlBody #banner_cintillo {
-		display: block !important;
-	}
-
-	.headerEv+.wrapper {
-		padding-top: 88px;
-	}
-
-	@media (min-width: 1024px) {
-		.headerEv+.wrapper {
-			padding-top: 96px;
-		}
-	}
-
-	#banner_cintillo .inlineEditToolbar {
-		max-width: 200px !important;
-	}
-
-	#banner_cintillo .promotional-strip-swiper,
-	#banner_cintillo .promotional-strip-panels {
-		width: 100%;
-		height: 100%;
-	}
-
-	#banner_cintillo .promotional-strip-panels {
-		display: grid !important;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		transform: none;
-	}
-
-	#banner_cintillo .swiper-slide {
-		width: auto !important;
-		height: 70px;
-	}
-
-	#banner_cintillo .campaign-panel {
-		position: relative;
-		display: flex;
-		align-items: center;
-		justify-content: flex-end;
-		color: #ffffff;
-		background-color: var(--campaign-panel-color);
-		padding: 0;
-	}
-
-	#banner_cintillo .campaign-background {
-		position: absolute;
-		inset: 0;
-		display: block;
-		width: 100%;
-		height: 100%;
-		pointer-events: none;
-		object-fit: cover;
-	}
-
-	#banner_cintillo .campaign-panel__content,
-	#banner_cintillo .offer-panel__content {
-		position: relative;
-		z-index: 1;
-		display: flex;
-		align-items: center;
-		width: min(100%, 720px);
-		height: 100%;
-	}
-
-	#banner_cintillo .campaign-panel__content {
-		justify-content: flex-end;
-		gap: clamp(22px, 3vw, 64px);
-		padding: 0 clamp(24px, 4vw, 76px) 0 20px;
-	}
-
-	#banner_cintillo .campaign-brand {
-		display: contents;
-	}
-
-	#banner_cintillo .logo_banner {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex: 0 0 auto;
-	}
-
-	#banner_cintillo .logo_banner img {
-		display: block;
-		width: 121px;
-		height: auto;
-	}
-
-	#banner_cintillo .countdown_section {
-		display: flex;
-		align-items: center;
-		gap: 14px;
-	}
-
-	#banner_cintillo .campaign-label {
-		margin: 0;
-		font-family: "AMX Black", "Roboto", sans-serif;
-		font-size: 16px;
-		font-weight: 800;
-		white-space: nowrap;
-	}
-
-	#banner_cintillo .campaign-label--last-hours {
-		display: none;
-		font-size: 13px;
-	}
-
-	#banner_cintillo[data-campaign-phase="last-hours"] .campaign-label--default {
-		display: none;
-	}
-
-	#banner_cintillo[data-campaign-phase="last-hours"] .campaign-label--last-hours {
-		display: block;
-	}
-
-	#banner_cintillo[data-campaign-phase="last-hours"] .countdown_section {
-		gap: clamp(22px, 2.5vw, 48px);
-	}
-
-	#banner_cintillo .countdown {
-		display: flex;
-		align-items: flex-start;
-		min-width: 232px;
-	}
-
-	#banner_cintillo .countdown-unit {
-		display: grid;
-		justify-items: center;
-		margin: 0;
-	}
-
-	#banner_cintillo .countdown-unit dt {
-		font-family: "AMX Black", "Roboto", sans-serif;
-		font-size: 34px;
-		font-weight: 900;
-		line-height: 27px;
-	}
-
-	#banner_cintillo .countdown-unit dd {
-		margin: 0;
-		font-size: 13px;
-		font-weight: 700;
-		line-height: 10px;
-	}
-
-	#banner_cintillo .countdown-separator {
-		margin: 0 6px;
-		font-size: 20px;
-		font-weight: 900;
-		line-height: 25px;
-	}
-
-	#banner_cintillo .cyber_section {
-		max-width: 330px;
-		font-family: "AMX Black", "Roboto", sans-serif;
-		font-size: 17px;
-		font-weight: 800;
-		text-align: center;
-	}
-
-	#banner_cintillo .cyber_section p {
-		margin: 0;
-	}
-
-	#banner_cintillo .offer-panel {
-		display: flex;
-		align-items: center;
-		color: var(--offer-text-color);
-		background: var(--offer-panel-color);
-		padding: 0;
-	}
-
-	#banner_cintillo .offer-panel__content {
-		justify-content: flex-start;
-		gap: clamp(18px, 2vw, 36px);
-		padding: 0 48px 0 clamp(34px, 4vw, 76px);
-	}
-
-	#banner_cintillo .offer-image {
-		display: block;
-		flex: 0 0 100px;
-		width: 100px;
-		height: 70px;
-		object-fit: contain;
-		align-self: flex-end;
-		object-position: center bottom;
-	}
-
-	#banner_cintillo .offer-copy {
-		display: flex;
-		flex: 0 1 330px;
-		flex-direction: column;
-		line-height: 1.1;
-	}
-
-	#banner_cintillo .offer-copy strong {
-		font-family: "AMX Black", "Roboto", sans-serif;
-		font-size: 16px;
-	}
-
-	#banner_cintillo .offer-copy span {
-		margin-top: 3px;
-		font-size: 11px;
-	}
-
-	#banner_cintillo .view_more_btn {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		min-width: 120px;
-		height: 39px;
-		padding: 0 18px;
-		border-radius: 999px;
-		color: #ffffff;
-		background: var(--cta-color);
-		font-size: 13px;
-		font-weight: 700;
-		text-decoration: none;
-		transition: background-color .2s ease-in-out;
-	}
-
-	#banner_cintillo .view_more_btn:hover,
-	#banner_cintillo .view_more_btn:focus-visible {
-		background: #b51f15;
-	}
-
-	#banner_cintillo .closeElement {
-		position: absolute;
-		top: 0;
-		right: 12px;
-		z-index: 4;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 34px;
-		height: 70px;
-		padding: 0;
-		border: 0;
-		color: var(--countdown-close-color);
-		background: transparent;
-		cursor: pointer;
-	}
-
-	#banner_cintillo .swiper-pagination {
-		display: none;
-	}
-
-	#banner_cintillo.sticky {
-		position: fixed;
-		top: 55px;
-		right: 0;
-		left: 0;
-		z-index: 10;
-	}
-
-	@media screen and (min-width: 1025px) and (max-width: 1460px) {
-		#banner_cintillo .campaign-panel__content {
-			gap: 18px;
-			padding-right: 28px;
-		}
-
-		#banner_cintillo .offer-panel__content {
-			gap: 18px;
-			padding-right: 48px;
-			padding-left: 28px;
-		}
-	}
-
-	@media screen and (max-width: 1024px) and (min-width: 769px) {
-		#banner_cintillo .campaign-panel__content {
-			gap: 18px;
-			padding-right: 24px;
-		}
-
-		#banner_cintillo .offer-panel__content {
-			gap: 14px;
-			padding: 0 42px 0 24px;
-		}
-
-		#banner_cintillo .countdown-seconds {
-			display: none;
-		}
-
-		#banner_cintillo .countdown {
-			min-width: 170px;
-		}
-
-		#banner_cintillo .view_more_btn {
-			min-width: 98px;
-		}
-	}
-
-	@media screen and (max-width: 820px) {
-		#banner_cintillo.sticky {
-			top: 50px;
-		}
-	}
-
-	@media screen and (max-width: 768px) {
-		#banner_cintillo .promotional-strip-panels {
-			display: flex !important;
-			transform: translate3d(0, 0, 0);
-		}
-
-		#banner_cintillo .swiper-slide {
-			width: 100% !important;
-		}
-
-		#banner_cintillo .campaign-panel,
-		#banner_cintillo .offer-panel {
-			justify-content: center;
-		}
-
-		#banner_cintillo .campaign-panel__content,
-		#banner_cintillo .offer-panel__content {
-			height: 70px;
-		}
-
-		#banner_cintillo .campaign-panel__content {
-			justify-content: center;
-			gap: clamp(18px, 8vw, 56px);
-			padding: 0 42px 0 20px;
-		}
-
-		#banner_cintillo .offer-panel__content {
-			justify-content: center;
-			gap: clamp(14px, 4vw, 28px);
-			padding: 0 48px 0 24px;
-		}
-
-		#banner_cintillo .offer-copy {
-			flex-basis: auto;
-			max-width: 270px;
-		}
-
-		#banner_cintillo .countdown-seconds {
-			display: none;
-		}
-
-		#banner_cintillo .countdown {
-			min-width: 170px;
-		}
-
-		#banner_cintillo[data-campaign-phase="last-hours"] .campaign-brand {
-			display: flex;
-			flex: 0 0 auto;
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 4px;
-		}
-
-		#banner_cintillo[data-campaign-phase="last-hours"] .logo_banner {
-			align-items: flex-start;
-		}
-
-		#banner_cintillo[data-campaign-phase="last-hours"] .countdown_section {
-			gap: 0;
-		}
-
-		#banner_cintillo .swiper-pagination {
-			bottom: 3px;
-			display: flex;
-			justify-content: center;
-			gap: 3px;
-		}
-
-		#banner_cintillo .swiper-pagination-bullet {
-			width: 6px;
-			height: 6px;
-			margin: 0 2px;
-			background: #6a6a6a;
-			opacity: .45;
-		}
-
-		#banner_cintillo .campaign-panel .swiper-pagination-bullet {
-			background: #ffffff;
-		}
-
-		#banner_cintillo .swiper-pagination-bullet-active {
-			opacity: 1;
-		}
-	}
-
-	@media screen and (max-width: 540px) {
-		#banner_cintillo .campaign-panel__content {
-			justify-content: space-between;
-			gap: 6px;
-			padding: 0 20px 0 14px;
-		}
-
-		#banner_cintillo .logo_banner img {
-			width: 82px;
-		}
-
-		#banner_cintillo .countdown_section {
-			flex: 0 0 auto;
-			gap: 10px;
-		}
-
-		#banner_cintillo .countdown {
-			min-width: 150px;
-		}
-
-		#banner_cintillo .countdown-unit dt {
-			font-size: 24px;
-		}
-
-		#banner_cintillo .countdown-separator {
-			margin: 0 4px;
-		}
-
-		#banner_cintillo .campaign-label {
-			font-size: 12px;
-		}
-
-		#banner_cintillo .campaign-label--last-hours {
-			max-width: 136px;
-			font-size: 10px;
-			line-height: 11px;
-			white-space: normal;
-		}
-
-		#banner_cintillo[data-campaign-phase="last-hours"] .campaign-panel__content {
-			justify-content: space-between;
-			gap: 10px;
-		}
-
-		#banner_cintillo[data-campaign-phase="last-hours"] .countdown_section {
-			flex: 0 0 150px;
-		}
-
-		#banner_cintillo .offer-panel__content {
-			gap: 8px;
-			padding: 0 46px 0 14px;
-		}
-
-		#banner_cintillo .offer-copy {
-			flex: 1 1 120px;
-			max-width: fit-content;
-		}
-
-		#banner_cintillo .offer-copy strong {
-			font-size: 13px;
-			line-height: 1.1;
-		}
-
-		#banner_cintillo .offer-copy span {
-			display: block;
-			margin-top: 2px;
-			font-size: 12px;
-			line-height: 1.1;
-		}
-
-		#banner_cintillo .view_more_btn {
-			min-width: 82px;
-			height: 34px;
-			padding: 0 10px;
-			font-size: 12px;
-		}
-
-		#banner_cintillo .offer-image {
-			flex-basis: 64px;
-			width: 84px;
-			height: 62px;
-		}
-	}
-
-	.headerEv .hdMainLeft .logo img {
-		max-width: fit-content;
-	}
-</style>
-
-<script is:inline>
-	// window.IS_DEVELOP = false;
-	window.CONTADOR_ACTIVO = true;
-	// window.SHOWCYBERTOFINISHED = false;
-</script>
-
 <script>
 	import Swiper from 'swiper/bundle';
 	import 'swiper/css/bundle';
 	import { parseFechaCMS, startCountdown } from '@/utils/countdown.js';
 
-	const CONTADOR_ACTIVO = typeof (window as any).CONTADOR_ACTIVO !== 'undefined' && (window as any).CONTADOR_ACTIVO;
 	const limitDesktop = 100;
 	const limitMobile = 70;
 	const maxTransitionDelay = 60_000;
@@ -611,30 +114,7 @@ import offerImage from '@/assets/oferta_img.png';
 	if (!banner_cintillo) {
 		console.error('Banner cintillo no encontrado');
 	} else {
-		const logo_banner = banner_cintillo.querySelector('.logo_banner') as HTMLElement | null;
-		const banner_contador = banner_cintillo.querySelector('.countdown_section') as HTMLElement | null;
-		const banner_cyber = banner_cintillo.querySelector('.cyber_section') as HTMLElement | null;
 		const closeElement = banner_cintillo.querySelector('.closeElement') as HTMLButtonElement | null;
-
-		const showCountdownMode = () => {
-			banner_cintillo.classList.remove('cyber');
-			banner_contador?.classList.remove('hidden');
-			banner_cyber?.classList.add('hidden');
-			logo_banner?.classList.remove('hidden');
-		};
-
-		const showPromotionMode = () => {
-			banner_cintillo.classList.add('cyber');
-			banner_contador?.classList.add('hidden');
-			banner_cyber?.classList.remove('hidden');
-			logo_banner?.classList.add('hidden');
-		};
-
-		if (CONTADOR_ACTIVO) {
-			showCountdownMode();
-		} else {
-			showPromotionMode();
-		}
 
 		const syncMobileSwiper = () => {
 			if (mobileLayout.matches && !mobileSwiper) {
@@ -642,17 +122,13 @@ import offerImage from '@/assets/oferta_img.png';
 					slidesPerView: 1,
 					spaceBetween: 0,
 					speed: 500,
-					autoplay: prefersReducedMotion.matches
-						? false
-						: {
-							delay: 1000,
-							disableOnInteraction: false,
-							pauseOnMouseEnter: true,
-						},
-					pagination: {
-						el: '.promotional-strip-swiper .swiper-pagination',
-						clickable: true,
-					},
+					loop: true,
+						autoplay: prefersReducedMotion.matches
+							? false
+							: {
+								delay: 5000,
+								disableOnInteraction: false,
+							},
 					a11y: {
 						enabled: true,
 						paginationBulletMessage: 'Ir a la diapositiva {{index}}',
@@ -666,7 +142,14 @@ import offerImage from '@/assets/oferta_img.png';
 
 		const revealBanner = () => {
 			banner_cintillo.removeAttribute('style');
-			window.requestAnimationFrame(() => mobileSwiper?.update());
+			window.requestAnimationFrame(() => {
+				mobileSwiper?.update();
+
+				if (mobileSwiper && !prefersReducedMotion.matches) {
+					mobileSwiper.autoplay.stop();
+					mobileSwiper.autoplay.start();
+				}
+			});
 		};
 
 		syncMobileSwiper();
@@ -733,13 +216,8 @@ import offerImage from '@/assets/oferta_img.png';
 					if (isDevelopMode) {
 						banner_cintillo.dataset.campaignPhase = 'countdown';
 						revealBanner();
-						if (CONTADOR_ACTIVO) {
-							showCountdownMode();
-							const intervalId = startCountdown(dateInit, syncCampaignState);
-							if (intervalId !== null) countdownInterval = intervalId;
-						} else {
-							showPromotionMode();
-						}
+						const intervalId = startCountdown(dateInit, syncCampaignState);
+						if (intervalId !== null) countdownInterval = intervalId;
 					} else {
 						hideBanner();
 					}
@@ -748,17 +226,8 @@ import offerImage from '@/assets/oferta_img.png';
 					return;
 				}
 
-				if (!CONTADOR_ACTIVO && now < dateCampaignEnd) {
-					banner_cintillo.dataset.campaignPhase = 'countdown';
-					showPromotionMode();
-					revealBanner();
-					scheduleTransition(dateCampaignEnd, syncCampaignState);
-					return;
-				}
-
 				if (now < dateEnd) {
 					banner_cintillo.dataset.campaignPhase = 'countdown';
-					showCountdownMode();
 					revealBanner();
 					const intervalId = startCountdown(dateEnd, syncCampaignState);
 					if (intervalId !== null) countdownInterval = intervalId;
@@ -768,7 +237,6 @@ import offerImage from '@/assets/oferta_img.png';
 
 				if (now < dateCampaignEnd) {
 					banner_cintillo.dataset.campaignPhase = 'last-hours';
-					showCountdownMode();
 					revealBanner();
 					const intervalId = startCountdown(dateCampaignEnd, syncCampaignState);
 					if (intervalId !== null) countdownInterval = intervalId;
