@@ -9,6 +9,10 @@ Use this repository to develop Claro Perú's campaign strip locally and maintain
 3. Run `npm run build` and verify both banner modes, campaign boundaries, responsive layout, close control, and sticky behavior.
 4. Confirm that the JSP still contains valid HCM placeholders and references the intended built CSS asset.
 
+## Project skills
+
+- `skills/claro-hcm-jsp-conversion/SKILL.md` — Convert HTML components into self-contained Claro HCM/WHM JSP artifacts.
+
 ## Stack and important paths
 
 | Path | Role |
