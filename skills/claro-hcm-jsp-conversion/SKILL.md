@@ -4,7 +4,7 @@ description: "Trigger: HCL DX, HCM JSP, CP HTML Avanzado, Claro CMS conversion. 
 license: Apache-2.0
 metadata:
   author: "javiercastro"
-  version: "1.1"
+  version: "1.2"
 ---
 
 ## Activation Contract
@@ -16,6 +16,7 @@ Load when converting, adapting, or reviewing an HTML component for confirmed Cla
 - Confirm the destination before conversion. Do not propose or convert to JSP or `CP HTML Avanzado` without confirmation.
 - Inspect the source HTML and the applicable reference before mapping markup.
 - Do not invent CMS keys, endpoints, dependencies, plugin syntax, or destination; request missing data.
+- Do not trust a CSS variable's name as proof of what CMS field it maps to. Validate every `[Element]`-to-CSS-custom-property mapping against the content template's declared field title (ask for the field list/screenshot if not provided) — a plausible name can still target the wrong DOM section.
 - Do not include upload instructions, credentials, Playwright/DevTools automation, or editing URLs; those belong to a separate delivery skill.
 - Balance and preserve `[Plugin:ifInRange]`, `[Plugin:Equals]`, `[Plugin:NotEquals]`, and `[IfEditMode]` directives exactly.
 - Use `htmlencode="false"` only for CMS-managed markup, images, or URLs.
@@ -45,6 +46,7 @@ Map rendered content to `[Element]`; map fields exposed by the current context t
 4. For `CP HTML Avanzado`, preserve the required document fragments, module scripts, and declared dependencies as delivered by Astro.
 5. For `Banner.jsp`, update assets and runtime deliberately from readable sources; preserve placeholders, date gating, and the bundled-script constraint.
 6. Review the selected artifact for CMS syntax where applicable, encoding boundaries, responsive behavior, and undeclared dependencies.
+7. Cross-check each CMS-driven CSS custom property against the CSS rule that actually consumes it (grep for `var(--name)`); an unused or misnamed variable means the CMS value has no visible effect.
 
 ## Output Contract
 

@@ -6,12 +6,15 @@
 }
 
 #banner_cintillo {
-  --campaign-panel-color: #0433FF;
-  --campaign-panel-accent: #021F99;
+  --countdown-bg-color: #0433FF;
+  --countdown-text-color: #ffffff;
+  --countdown-btn-bg-color: #da291c;
+  --countdown-btn-text-color: #ffffff;
+  --countdown-btn-hover-bg-color: #ffffff;
+  --countdown-btn-hover-text-color: #da291c;
+  --countdown-close-color: black;
   --offer-panel-color: #ffffff;
   --offer-text-color: #202124;
-  --cta-color: #da291c;
-  --countdown-close-color: black;
   position: relative;
   width: 100%;
   height: 70px;
@@ -59,8 +62,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  color: #ffffff;
-  background-color: var(--campaign-panel-color);
+  color: var(--countdown-text-color);
+  background-color: var(--countdown-bg-color);
   padding: 0;
 }
 
@@ -194,6 +197,13 @@
   align-self: flex-end;
   object-position: center bottom;
 }
+#banner_cintillo .offer-image img{
+  object-fit: contain;
+  align-self: flex-end;
+  object-position: center bottom;
+  width: 100%;
+  height: 100%;
+}
 
 #banner_cintillo .offer-copy {
   display: flex;
@@ -221,17 +231,20 @@
   height: 39px;
   padding: 0 18px;
   border-radius: 999px;
-  color: #ffffff;
-  background: var(--cta-color);
+  border: 1px solid transparent;
+  color: var(--countdown-btn-text-color);
+  background: var(--countdown-btn-bg-color);
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
-  transition: background-color .2s ease-in-out;
+  transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
 }
 
 #banner_cintillo .view_more_btn:hover,
 #banner_cintillo .view_more_btn:focus-visible {
-  background: #b51f15;
+  color: var(--countdown-btn-hover-text-color);
+  background: var(--countdown-btn-hover-bg-color);
+  border-color: var(--countdown-btn-hover-text-color);
 }
 
 #banner_cintillo .closeElement {
@@ -417,6 +430,7 @@
 
   #banner_cintillo .countdown-separator {
     margin: 0 4px;
+    line-height: 26px;
   }
 
   #banner_cintillo .campaign-label {
