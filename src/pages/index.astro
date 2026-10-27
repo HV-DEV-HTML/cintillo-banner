@@ -1,92 +1,21 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import cyberWowBackground from '@/assets/bg_cyberwow.jpg';
-import cyberWowLogo from '@/assets/cyberwow-logo.svg';
-import offerImage from '@/assets/oferta_img.png';
+import BannerV1 from '@/components/BannerV1.astro';
+import { DESIGN_VERSION } from '@/config/banner';
 ---
 
 <Layout title='Cintillo Banner - Contador'>
 	<div
 		id="banner_cintillo"
 		class="promotional-strip"
+		data-design-version={DESIGN_VERSION}
 		data-date-init="Oct 24, 2025, 5:05:00 PM Central Standard Time"
 		data-date-end="Oct 25, 2026, 5:06:00 PM Central Standard Time"
 		data-date-campaign-end="Oct 30, 2026, 5:06:00 PM Central Standard Time"
 		data-campaign-phase="countdown"
 		style="display: none;"
 	>
-		<div class="swiper promotional-strip-swiper">
-			<div class="swiper-wrapper promotional-strip-panels">
-				<section class="swiper-slide campaign-panel" aria-label="Campaign countdown">
-					<img
-						class="campaign-background"
-						src={cyberWowBackground.src}
-						width="1920"
-						height="140"
-						alt=""
-						aria-hidden="true"
-					/>
-					<div class="campaign-panel__content">
-						<div class="campaign-brand">
-							<div class="logo_banner">
-								<img src={cyberWowLogo.src} width="82" height="23" alt="Cyber Wow" />
-							</div>
-							<p class="campaign-label campaign-label--last-hours">¡ÚLTIMAS HORAS DE CYBER!</p>
-						</div>
-
-						<div class="countdown_section">
-							<p class="campaign-label campaign-label--default">Empieza en:</p>
-
-							<div id="countdown" class="countdown" aria-label="Tiempo restante">
-								<dl class="countdown-unit">
-									<dt><span class="dia_digito1">0</span><span class="dia_digito2">0</span></dt>
-									<dd>DÍA</dd>
-								</dl>
-								<span class="countdown-separator" aria-hidden="true">:</span>
-
-								<dl class="countdown-unit">
-									<dt><span class="hora_digito1">0</span><span class="hora_digito2">0</span></dt>
-									<dd>HORAS</dd>
-								</dl>
-								<span class="countdown-separator" aria-hidden="true">:</span>
-
-								<dl class="countdown-unit">
-									<dt><span class="minuto_digito1">0</span><span class="minuto_digito2">0</span></dt>
-									<dd>MIN</dd>
-								</dl>
-								<span class="countdown-separator countdown-seconds" aria-hidden="true">:</span>
-
-								<dl class="countdown-unit countdown-seconds">
-									<dt><span class="segundo_digito1">0</span><span class="segundo_digito2">0</span></dt>
-									<dd>SEG</dd>
-								</dl>
-							</div>
-						</div>
-
-					</div>
-				</section>
-
-				<section class="swiper-slide offer-panel" aria-label="Featured offer">
-					<div class="offer-panel__content">
-						<img
-							class="offer-image"
-							src={offerImage.src}
-							width="143"
-							height="105"
-							alt="Smartphones de la oferta"
-						/>
-						<div class="offer-copy">
-							<strong>¡Qué no se te escapen las ofertas!</strong>
-							<span>Hasta 50% de dscto. en equipos y planes.</span>
-						</div>
-						<a href="#" target="_blank" rel="noopener noreferrer" class="view_more_btn">
-							Ver oferta
-						</a>
-					</div>
-				</section>
-			</div>
-			<div class="swiper-pagination"></div>
-		</div>
+		<BannerV1 />
 
 		<button class="closeElement" type="button" aria-label="Cerrar banner">
 			<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
