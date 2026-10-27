@@ -21,7 +21,7 @@ Use this repository to develop Claro Perú's campaign strip locally and maintain
 | `src/Claro-JSP/Banner.jsp` | Older design kept as reference (Tailwind-era, inline minified script). Do not modify. |
 | `src/pages/index.astro` | Local banner fixture and the single readable script (version-agnostic: detects `data-design-version`, inits Swiper only if present). |
 | `src/components/BannerV1.astro`, `BannerV2.astro` | Local markup for each design. They contain no `<script>`/`<style>`; all CSS lives in `global.css`. |
-| `src/config/banner.ts` | `DESIGN_VERSION` (`'V1'` default) used by the fixture to pick the design. |
+| `src/components/DevFixtureV2.astro` | Dev-only `is:inline` style that mimics the CSS variables the JSP injects (rendered only for V2). |
 | `src/utils/countdown.js` | Readable CMS date parsing and countdown utilities bundled into the built page. |
 | `src/layouts/Layout.astro` | Local page shell, Claro reset stylesheet, fonts, and global CSS import. |
 | `src/styles/global.css` | Plain CSS for both designs (V1 rules, then V2 `.strip-v2__*` rules). Tailwind is no longer used. |
@@ -47,7 +47,7 @@ Test exact boundaries: just before start, at start, just before end, and at/afte
 - V2 is a single 70px row using only `.strip-v2__*` classes plus the shared `#countdown`, digit classes (`dia_digito1` ... `segundo_digito2`, all eight must stay in the DOM), `.closeElement` and `.sticky`. It reuses V1's CMS keys (see README).
 - Phases via `data-campaign-phase`: `countdown` shows "Empieza en:" + counter; `last-hours` shows the campaign text and button.
 - V2 color defaults use `#banner_cintillo:where([data-design-version="V2"])` (specificity 1,0,0) so the per-banner `<style>` injected by the JSP wins. Every injected `--var` in the JSP is wrapped in `[Plugin:NotEquals text1="" ...]` so an empty field does not emit `--x: ;`.
-- Building with `DESIGN_VERSION` V1 or V2 must emit identical `dist/_assets` hashes; after a build, update the hashed CSS/JS names in `Cintillo.JSP`.
+- Building with `PUBLIC_DESIGN_VERSION` unset (V1) or `V2` must emit identical `dist/_assets` hashes; after a build, update the hashed CSS/JS names in `Cintillo.JSP`.
 
 ## HCM/JSP constraints
 

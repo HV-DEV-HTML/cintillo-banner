@@ -2,21 +2,26 @@
 import Layout from '@layouts/Layout.astro';
 import BannerV1 from '@/components/BannerV1.astro';
 import BannerV2 from '@/components/BannerV2.astro';
-import { DESIGN_VERSION } from '@/config/banner';
+import DevFixtureV2 from '@/components/DevFixtureV2.astro';
+
+// Local mirror of the CMS selector `AT.DesignVersion` (anything but 'V2' falls back to V1).
+// Preview V2 with `PUBLIC_DESIGN_VERSION=V2 npm run dev` or a git-ignored `.env`.
+const isV2 = import.meta.env.PUBLIC_DESIGN_VERSION === 'V2';
+const Banner = isV2 ? BannerV2 : BannerV1;
 ---
 
 <Layout title='Cintillo Banner - Contador'>
 	<div
 		id="banner_cintillo"
 		class="promotional-strip"
-		data-design-version={DESIGN_VERSION}
+		data-design-version={isV2 ? 'V2' : 'V1'}
 		data-date-init="Oct 24, 2025, 5:05:00 PM Central Standard Time"
 		data-date-end="Oct 25, 2026, 5:06:00 PM Central Standard Time"
 		data-date-campaign-end="Oct 30, 2026, 5:06:00 PM Central Standard Time"
 		data-campaign-phase="countdown"
 		style="display: none;"
 	>
-		{DESIGN_VERSION === 'V2' ? <BannerV2 /> : <BannerV1 />}
+		<Banner />
 
 		<button class="closeElement" type="button" aria-label="Cerrar banner">
 			<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -26,20 +31,7 @@ import { DESIGN_VERSION } from '@/config/banner';
 		</button>
 	</div>
 
-	{DESIGN_VERSION === 'V2' && (
-		<style is:inline set:html={`
-	/* Dev fixture: mimics the per-banner <style> that Cintillo.JSP injects from the CMS color fields.
-	   These values must win over the V2 defaults declared in global.css. The "html" prefix keeps them winning
-	   in dev, where Vite injects global.css after this tag (in the JSP the <style> already comes after the CSS link). */
-	html #banner_cintillo {
-		--countdown-btn-bg-color: #ffffff;
-		--countdown-btn-text-color: #000000;
-		--countdown-btn-hover-bg-color: #ffd400;
-		--countdown-btn-hover-text-color: #000000;
-		--countdown-close-color: #ffffff;
-	}
-`} />
-	)}
+	{isV2 && <DevFixtureV2 />}
 </Layout>
 
 <script>

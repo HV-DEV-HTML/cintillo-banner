@@ -43,9 +43,8 @@ cintillo-banner/
 │   │   └── Banner.jsp              # Diseño anterior (referencia, no se modifica)
 │   ├── components/
 │   │   ├── BannerV1.astro          # Marcado V1 (dos paneles + Swiper en mobile)
-│   │   └── BannerV2.astro          # Marcado V2 (una sola fila)
-│   ├── config/
-│   │   └── banner.ts               # DESIGN_VERSION ('V1' | 'V2') para el fixture local
+│   │   ├── BannerV2.astro          # Marcado V2 (una sola fila)
+│   │   └── DevFixtureV2.astro      # Fixture local: imita las variables CSS del JSP (solo V2)
 │   ├── layouts/
 │   │   └── Layout.astro            # Layout base con fuentes y estilos
 │   ├── pages/
@@ -127,7 +126,7 @@ export default defineConfig({
 - El JSP escribe el valor en `data-design-version` de `#banner_cintillo`; un único script y un único CSS sirven a ambos diseños.
 - V2 reutiliza los mismos campos que V1: logo (`AT.FieldImage`), "Empieza en:" (`AT.FieldTitleContador`), texto de campaña (`AT.FieldDescription`), botón (`AT.FieldLinkText` / `AT.FieldLink`), fondo (`AT.FieldBackground`), colores (`AT.ColorBgBtn`, `AT.ColorTextBtn`, `AT.ColorBgBtnHover`, `AT.ColorTextBtnHover`, `AT.ColorBtnClose`) y fechas (`AT.FieldDate`, `AT.FieldDateEnd`, `AT.FieldDateCampaignEnd`). `AT.ColorBg` / `AT.ColorText` solo afectan al panel blanco de V1.
 - Fases (`data-campaign-phase`): `countdown` (hasta `AT.FieldDateEnd`) muestra "Empieza en:" + contador; `last-hours` (hasta `AT.FieldDateCampaignEnd`) muestra el texto de campaña y el botón; después el banner se oculta.
-- Local: cambia `DESIGN_VERSION` en `src/config/banner.ts` para previsualizar V1 o V2 en `localhost:4321`. Con `V2` el fixture inyecta un `<style>` que imita las variables CSS que emite el JSP.
+- Local: ejecuta `PUBLIC_DESIGN_VERSION=V2 npm run dev` (o define esa variable en un `.env`, ignorado por git) para previsualizar V2 en `localhost:4321`; sin la variable se ve V1. Con `V2` el fixture inyecta un `<style>` que imita las variables CSS que emite el JSP.
 - Después de `npm run build`, actualiza en `Cintillo.JSP` los nombres hasheados del CSS y del JS (`index.*.css`, `index.astro_astro_type_script_index_0_lang.*.js`) y sube `dist/_assets` al hosting de Claro. El build es idéntico para V1 y V2.
 
 ## 🎯 Uso en CMS Claro

@@ -4,7 +4,7 @@ Plan: `/Users/javiercastro/.claude-havas/plans/bueno-te-cuento-que-velvety-matsu
 Branch: `feat/cintillo-v2`. Writer: one Sonnet worker (delegated direct). TDD: no test runner in repo (only `npm run build`), so ordinary functional checks + chrome-devtools at localhost:4321.
 
 ## Objective
-One `src/Claro-JSP/Cintillo.JSP` that renders V1 (current two-panel/Swiper) or V2 (single row from Figma) depending on a CMS selector; `src/pages/index.astro` mirrors it via `DESIGN_VERSION` in `src/config/banner.ts`. `Banner.jsp` untouched.
+One `src/Claro-JSP/Cintillo.JSP` that renders V1 (current two-panel/Swiper) or V2 (single row from Figma) depending on a CMS selector; `src/pages/index.astro` mirrors it via the `PUBLIC_DESIGN_VERSION` env var (read in `index.astro`). `Banner.jsp` untouched.
 
 ## Open items
 - CMS key for the selector assumed `AT.DesignVersion` (options V1/V2, empty => V1). User must confirm/create it.
