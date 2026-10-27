@@ -45,7 +45,12 @@ import { DESIGN_VERSION } from '@/config/banner';
 	} else {
 		const closeElement = banner_cintillo.querySelector('.closeElement') as HTMLButtonElement | null;
 
+		// V2 renders a single row without a carousel, so Swiper is only needed when the V1 markup exists
+		const hasSwiper = banner_cintillo.querySelector('.promotional-strip-swiper') !== null;
+
 		const syncMobileSwiper = () => {
+			if (!hasSwiper) return;
+
 			if (mobileLayout.matches && !mobileSwiper) {
 				mobileSwiper = new Swiper('.promotional-strip-swiper', {
 					slidesPerView: 1,
@@ -145,7 +150,7 @@ import { DESIGN_VERSION } from '@/config/banner';
 					if (isDevelopMode) {
 						banner_cintillo.dataset.campaignPhase = 'countdown';
 						revealBanner();
-						const intervalId = startCountdown(dateInit, syncCampaignState);
+						const intervalId = startCountdown(dateInit, syncCampaignState, banner_cintillo);
 						if (intervalId !== null) countdownInterval = intervalId;
 					} else {
 						hideBanner();
@@ -158,7 +163,7 @@ import { DESIGN_VERSION } from '@/config/banner';
 				if (now < dateEnd) {
 					banner_cintillo.dataset.campaignPhase = 'countdown';
 					revealBanner();
-					const intervalId = startCountdown(dateEnd, syncCampaignState);
+					const intervalId = startCountdown(dateEnd, syncCampaignState, banner_cintillo);
 					if (intervalId !== null) countdownInterval = intervalId;
 					scheduleTransition(dateEnd, syncCampaignState);
 					return;
@@ -167,7 +172,7 @@ import { DESIGN_VERSION } from '@/config/banner';
 				if (now < dateCampaignEnd) {
 					banner_cintillo.dataset.campaignPhase = 'last-hours';
 					revealBanner();
-					const intervalId = startCountdown(dateCampaignEnd, syncCampaignState);
+					const intervalId = startCountdown(dateCampaignEnd, syncCampaignState, banner_cintillo);
 					if (intervalId !== null) countdownInterval = intervalId;
 					scheduleTransition(dateCampaignEnd, syncCampaignState);
 					return;

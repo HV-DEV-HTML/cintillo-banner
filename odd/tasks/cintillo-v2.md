@@ -14,7 +14,7 @@ One `src/Claro-JSP/Cintillo.JSP` that renders V1 (current two-panel/Swiper) or V
 - [x] 0. Branch + fixture dates committed (6ecf3c2) — route: inline
 - [x] 1. countdown.js optional `root` + guards
 - [x] 2. config/banner.ts + BannerV1.astro + data-design-version
-- [ ] 3. Script: Swiper conditional, startCountdown root
+- [x] 3. Script: Swiper conditional, startCountdown root
 - [ ] 4. BannerV2.astro + Figma bg asset + fixture style
 - [ ] 5. V2 desktop CSS
 - [ ] 6. V2 responsive CSS
@@ -29,4 +29,5 @@ Tasks 1-10 routed to a delegated writer (writer trigger: 2+ non-trivial files, p
 
 Baseline V1 console (pre-existing): AMX font CORS errors from localhost, Swiper loop warning. Chrome min viewport width here is 500px.
 - Task 1: countdown.js optional `root` + guards. Build OK; V1 countdown ticks (seconds 32 -> 30 over 2.2s); no new console errors. Commit: d87db05
-- Task 2: config/banner.ts + BannerV1.astro + data-design-version. Build OK; V1 DOM rects at 1920 and 768 identical to baseline (digit-width jitter only). Commit: see git log (refactor(banner))
+- Task 2: config/banner.ts + BannerV1.astro + data-design-version. Build OK; V1 DOM rects at 1920 and 768 identical to baseline (digit-width jitter only). Commit: 1b42478
+- Task 3: Swiper only when `.promotional-strip-swiper` exists; startCountdown gets banner root. Build OK; V1 at 768 initialized and rotated slide 0 -> 1 after 6s, countdown ticks, no horizontal scroll. V2 no-Swiper path verified in task 4. Commit: see git log (refactor(script))
