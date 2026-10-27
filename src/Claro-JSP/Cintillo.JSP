@@ -1,7 +1,7 @@
 [Plugin:ifInRange from="[PageInfo value='firstItemOnPage']"]
 <!-- Existing project asset reference; all component-critical styles are kept inline below. -->
 <link rel="stylesheet" href="https://www.claro.com.pe/assets/havas/banner_cintillo/_assets/index.BH4JZYC6.css">
-<link rel="stylesheet" href="https://www.claro.com.pe/assets/havas/banner_cintillo/_assets/index.BydG3LBI.css">
+<link rel="stylesheet" href="https://www.claro.com.pe/assets/havas/banner_cintillo/_assets/index.DO-cEYY6.css">
 <div
   id="banner_cintillo"
   class="promotional-strip"
@@ -166,5 +166,5 @@
 </style>
 
 <script type="module"
-	src="https://www.claro.com.pe/assets/havas/banner_cintillo/_assets/index.astro_astro_type_script_index_0_lang.BWOboCRH.js"></script>
+	src="https://www.claro.com.pe/assets/havas/banner_cintillo/_assets/index.astro_astro_type_script_index_0_lang.DlwPLqHr.js"></script>
 [/Plugin:ifInRange]
