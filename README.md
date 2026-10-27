@@ -28,7 +28,7 @@ Banner dinámico con contador regresivo para campañas de marketing en el sitio 
 ## 🛠 Tecnologías
 
 - **[Astro](https://astro.build/)** - Framework web moderno
-- **[TailwindCSS](https://tailwindcss.com/)** - Framework CSS utility-first
+- **CSS plano** - Estilos en `src/styles/global.css` (el proyecto ya no usa Tailwind)
 - **TypeScript** - Tipado estático
 - **JavaScript Vanilla** - Sin dependencias de librerías externas
 - **Vite** - Build tool ultra-rápido
@@ -39,7 +39,12 @@ Banner dinámico con contador regresivo para campañas de marketing en el sitio 
 cintillo-banner/
 ├── src/
 │   ├── Claro-JSP/
-│   │   └── Banner.jsp              # Archivo para desplegar en CMS Claro
+│   │   ├── Cintillo.JSP            # JSP principal (diseño V1 y V2, selector en el CMS)
+│   │   └── Banner.jsp              # Diseño anterior (referencia, no se modifica)
+│   ├── components/
+│   │   ├── BannerV1.astro          # Marcado V1 (dos paneles + Swiper en mobile)
+│   │   ├── BannerV2.astro          # Marcado V2 (una sola fila)
+│   │   └── DevFixtureV2.astro      # Fixture local: imita las variables CSS del JSP (solo V2)
 │   ├── layouts/
 │   │   └── Layout.astro            # Layout base con fuentes y estilos
 │   ├── pages/
@@ -50,7 +55,6 @@ cintillo-banner/
 │       └── countdown.js            # Funciones utilitarias del contador
 ├── dist/                           # Build de producción (generado)
 ├── astro.config.mjs                # Configuración de Astro
-├── tailwind.config.mjs             # Configuración de TailwindCSS
 └── package.json
 ```
 
@@ -108,6 +112,22 @@ export default defineConfig({
   }
 });
 ```
+
+## 🎨 Diseño V1 / V2 (`Cintillo.JSP`)
+
+`src/Claro-JSP/Cintillo.JSP` es el JSP principal y contiene ambos diseños. Un selector del CMS decide cuál se renderiza:
+
+| Campo | Key CMS | Valores |
+|-------|---------|---------|
+| **Diseño** | `AT.DesignVersion` | `V1` (o vacío) = dos paneles + Swiper en mobile; `V2` = fila única de 70px |
+
+> La clave `AT.DesignVersion` debe crearse en el CMS (opción V1/V2) antes de publicar el JSP.
+
+- El JSP escribe el valor en `data-design-version` de `#banner_cintillo`; un único script y un único CSS sirven a ambos diseños.
+- V2 reutiliza los mismos campos que V1: logo (`AT.FieldImage`), "Empieza en:" (`AT.FieldTitleContador`), texto de campaña (`AT.FieldDescription`), botón (`AT.FieldLinkText` / `AT.FieldLink`), fondo (`AT.FieldBackground`), colores (`AT.ColorBgBtn`, `AT.ColorTextBtn`, `AT.ColorBgBtnHover`, `AT.ColorTextBtnHover`, `AT.ColorBtnClose`) y fechas (`AT.FieldDate`, `AT.FieldDateEnd`, `AT.FieldDateCampaignEnd`). `AT.ColorBg` / `AT.ColorText` solo afectan al panel blanco de V1.
+- Fases (`data-campaign-phase`): `countdown` (hasta `AT.FieldDateEnd`) muestra "Empieza en:" + contador; `last-hours` (hasta `AT.FieldDateCampaignEnd`) muestra el texto de campaña y el botón; después el banner se oculta.
+- Local: ejecuta `PUBLIC_DESIGN_VERSION=V2 npm run dev` (o define esa variable en un `.env`, ignorado por git) para previsualizar V2 en `localhost:4321`; sin la variable se ve V1. Con `V2` el fixture inyecta un `<style>` que imita las variables CSS que emite el JSP.
+- Después de `npm run build`, actualiza en `Cintillo.JSP` los nombres hasheados del CSS y del JS (`index.*.css`, `index.astro_astro_type_script_index_0_lang.*.js`) y sube `dist/_assets` al hosting de Claro. El build es idéntico para V1 y V2.
 
 ## 🎯 Uso en CMS Claro
 
