@@ -26,23 +26,20 @@ import { DESIGN_VERSION } from '@/config/banner';
 		</button>
 	</div>
 
-	{
-		DESIGN_VERSION === 'V2' && (
-			<style is:inline>
-				{`
+	{DESIGN_VERSION === 'V2' && (
+		<style is:inline set:html={`
 	/* Dev fixture: mimics the per-banner <style> that Cintillo.JSP injects from the CMS color fields.
-	   These values must win over the V2 defaults declared in global.css. */
-	#banner_cintillo {
+	   These values must win over the V2 defaults declared in global.css. The "html" prefix keeps them winning
+	   in dev, where Vite injects global.css after this tag (in the JSP the <style> already comes after the CSS link). */
+	html #banner_cintillo {
 		--countdown-btn-bg-color: #ffffff;
 		--countdown-btn-text-color: #000000;
 		--countdown-btn-hover-bg-color: #ffd400;
 		--countdown-btn-hover-text-color: #000000;
 		--countdown-close-color: #ffffff;
 	}
-`}
-			</style>
-		)
-	}
+`} />
+	)}
 </Layout>
 
 <script>

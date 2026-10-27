@@ -16,7 +16,7 @@ One `src/Claro-JSP/Cintillo.JSP` that renders V1 (current two-panel/Swiper) or V
 - [x] 2. config/banner.ts + BannerV1.astro + data-design-version
 - [x] 3. Script: Swiper conditional, startCountdown root
 - [x] 4. BannerV2.astro + Figma bg asset + fixture style
-- [ ] 5. V2 desktop CSS
+- [x] 5. V2 desktop CSS
 - [ ] 6. V2 responsive CSS
 - [ ] 7. V1 regression + sticky/close/hover
 - [ ] 8. Cintillo.JSP V1/V2 blocks + guarded vars
@@ -31,4 +31,5 @@ Baseline V1 console (pre-existing): AMX font CORS errors from localhost, Swiper 
 - Task 1: countdown.js optional `root` + guards. Build OK; V1 countdown ticks (seconds 32 -> 30 over 2.2s); no new console errors. Commit: d87db05
 - Task 2: config/banner.ts + BannerV1.astro + data-design-version. Build OK; V1 DOM rects at 1920 and 768 identical to baseline (digit-width jitter only). Commit: 1b42478
 - Task 3: Swiper only when `.promotional-strip-swiper` exists; startCountdown gets banner root. Build OK; V1 at 768 initialized and rotated slide 0 -> 1 after 6s, countdown ticks, no horizontal scroll. V2 no-Swiper path verified in task 4. Commit: 4ca878d
-- Task 4: BannerV2.astro + bg_cyberwow_v2.png (composited offline from Figma gradient + two WOW watermark masks into one 1920x70 image, since the CMS supplies a single bg image) + dev-only fixture `<style is:inline>` (V2 only). Build OK (V1 default); with V2: 8 digit spans, countdown ticks (18 -> 16s), no Swiper, no console errors. Commit: see git log (feat(banner))
+- Task 4: BannerV2.astro + bg_cyberwow_v2.png (composited offline from Figma gradient + two WOW watermark masks into one 1920x70 image, since the CMS supplies a single bg image) + dev-only fixture `<style is:inline>` (V2 only). Build OK (V1 default); with V2: 8 digit spans, countdown ticks (18 -> 16s), no Swiper, no console errors. Commit: 5e4ddf6
+- Task 5: V2 desktop CSS in global.css (defaults via :where, phase toggle, hover vars). Verified at 1920 vs Figma: countdown phase logo x=735 (Figma 731), label right edge 979 (979), counter starts 987 (987), 198px wide; campaign phase logo 463 (469), text 687 (693), button 165x40 white pill. CMS wins: fixture var change turned button red (after the .2s transition). Fixture style fixed (set:html, `html #banner_cintillo` prefix, because Vite injects global.css after the tag in dev). Commit: see git log (feat(banner-v2))

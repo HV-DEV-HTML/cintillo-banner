@@ -492,3 +492,162 @@
 .headerEv .hdMainLeft .logo img {
   max-width: fit-content;
 }
+
+/* ==========================================================================
+   Design V2 (single row, selected with data-design-version="V2")
+   Only the .strip-v2__* classes are V2-specific; #countdown, the digit
+   classes, .closeElement and .sticky are shared with V1.
+   ========================================================================== */
+
+/* Defaults sit at specificity (1,0,0) and come after the base block, so the
+   per-banner <style> that the CMS injects later in the page still wins. */
+#banner_cintillo:where([data-design-version="V2"]) {
+  --countdown-text-color: #ffffff;
+  --countdown-btn-bg-color: #ffffff;
+  --countdown-btn-text-color: #000000;
+  --countdown-close-color: #ffffff;
+}
+
+#banner_cintillo .strip-v2 {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  overflow: hidden;
+  color: var(--countdown-text-color);
+  background-color: var(--countdown-bg-color);
+  font-family: "AMX", "Roboto", sans-serif;
+  font-weight: 700;
+}
+
+/* The CMS delivers the image as an <img> wrapped in a <div>, so cover both. */
+#banner_cintillo .strip-v2__bg,
+#banner_cintillo .strip-v2__bg img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+#banner_cintillo .strip-v2__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0 56px;
+}
+
+#banner_cintillo .strip-v2__logo {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  width: 117px;
+  margin-right: 29px;
+}
+
+#banner_cintillo .strip-v2__logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#banner_cintillo .strip-v2__label {
+  flex: 0 0 auto;
+  margin: 0 8px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+#banner_cintillo .strip-v2__countdown {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-start;
+}
+
+#banner_cintillo .strip-v2__unit {
+  width: 44px;
+  text-align: center;
+}
+
+#banner_cintillo .strip-v2__digits {
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: -0.6px;
+}
+
+#banner_cintillo .strip-v2__unit-label {
+  display: block;
+  margin-top: 2px;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 13px;
+  letter-spacing: -0.28px;
+  text-transform: uppercase;
+}
+
+#banner_cintillo .strip-v2__sep {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: -0.5px;
+}
+
+#banner_cintillo .strip-v2__text {
+  flex: 0 1 auto;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+#banner_cintillo .strip-v2__btn {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 165px;
+  height: 40px;
+  margin-left: 37px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  color: var(--countdown-btn-text-color);
+  background: var(--countdown-btn-bg-color);
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
+}
+
+#banner_cintillo .strip-v2__btn:hover,
+#banner_cintillo .strip-v2__btn:focus-visible {
+  color: var(--countdown-btn-hover-text-color);
+  background: var(--countdown-btn-hover-bg-color);
+  border-color: var(--countdown-btn-hover-text-color);
+}
+
+/* Phase toggle: countdown shows the counter, last-hours shows the campaign copy. */
+#banner_cintillo[data-campaign-phase="countdown"] .strip-v2__text,
+#banner_cintillo[data-campaign-phase="countdown"] .strip-v2__btn,
+#banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__label,
+#banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__countdown {
+  display: none;
+}
+
+#banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__logo {
+  margin-right: 107px;
+}
