@@ -76,22 +76,34 @@ export function splitDigits(num) {
 /**
  * Update countdown display
  * @param {Date} targetDate - Target date for countdown
+ * @param {ParentNode} [root=document] - Container used to look up the digit nodes
  * @returns {boolean} - True if countdown should continue, false if finished
  */
-export function updateCountdown(targetDate) {
+export function updateCountdown(targetDate, root = document) {
+  const digits = {
+    d0: root.querySelector('.dia_digito1'),
+    d1: root.querySelector('.dia_digito2'),
+    h0: root.querySelector('.hora_digito1'),
+    h1: root.querySelector('.hora_digito2'),
+    m0: root.querySelector('.minuto_digito1'),
+    m1: root.querySelector('.minuto_digito2'),
+    s0: root.querySelector('.segundo_digito1'),
+    s1: root.querySelector('.segundo_digito2'),
+  };
+
+  // Nothing to render if any digit node is missing
+  if (Object.values(digits).some((node) => !node)) {
+    return false;
+  }
+
   const now = new Date().getTime();
   const distance = targetDate.getTime() - now;
 
   if (distance <= 0) {
     // Countdown finished - set all to zero
-    document.querySelector('.dia_digito1').textContent = '0';
-    document.querySelector('.dia_digito2').textContent = '0';
-    document.querySelector('.hora_digito1').textContent = '0';
-    document.querySelector('.hora_digito2').textContent = '0';
-    document.querySelector('.minuto_digito1').textContent = '0';
-    document.querySelector('.minuto_digito2').textContent = '0';
-    document.querySelector('.segundo_digito1').textContent = '0';
-    document.querySelector('.segundo_digito2').textContent = '0';
+    Object.values(digits).forEach((node) => {
+      node.textContent = '0';
+    });
     return false;
   }
 
@@ -108,14 +120,14 @@ export function updateCountdown(targetDate) {
   const [s0, s1] = splitDigits(seconds);
 
   // Update DOM
-  document.querySelector('.dia_digito1').textContent = d0;
-  document.querySelector('.dia_digito2').textContent = d1;
-  document.querySelector('.hora_digito1').textContent = h0;
-  document.querySelector('.hora_digito2').textContent = h1;
-  document.querySelector('.minuto_digito1').textContent = m0;
-  document.querySelector('.minuto_digito2').textContent = m1;
-  document.querySelector('.segundo_digito1').textContent = s0;
-  document.querySelector('.segundo_digito2').textContent = s1;
+  digits.d0.textContent = d0;
+  digits.d1.textContent = d1;
+  digits.h0.textContent = h0;
+  digits.h1.textContent = h1;
+  digits.m0.textContent = m0;
+  digits.m1.textContent = m1;
+  digits.s0.textContent = s0;
+  digits.s1.textContent = s1;
 
   return true;
 }
@@ -124,11 +136,17 @@ export function updateCountdown(targetDate) {
  * Start countdown interval
  * @param {Date} targetDate - Target date for countdown
  * @param {Function} onFinish - Optional callback to execute when countdown reaches 0
+ * @param {ParentNode} [root=document] - Container used to look up the digit nodes
  * @returns {number|null} - Interval ID that can be used to stop the countdown
  */
-export function startCountdown(targetDate, onFinish) {
+export function startCountdown(targetDate, onFinish, root = document) {
+  // Without digit nodes there is nothing to tick; skip onFinish so callers do not loop
+  if (!root.querySelector('.dia_digito1')) {
+    return null;
+  }
+
   // Initial update
-  const initialShouldContinue = updateCountdown(targetDate);
+  const initialShouldContinue = updateCountdown(targetDate, root);
   
   // If countdown is already finished, call the callback immediately
   if (!initialShouldContinue && typeof onFinish === 'function') {
@@ -141,7 +159,7 @@ export function startCountdown(targetDate, onFinish) {
 
   // Start countdown interval
   const intervalId = setInterval(function() {
-    const shouldContinue = updateCountdown(targetDate);
+    const shouldContinue = updateCountdown(targetDate, root);
     if (!shouldContinue) {
       clearInterval(intervalId);
       // Execute callback when countdown finishes
