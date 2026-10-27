@@ -1,0 +1,43 @@
+---
+import cyberWowBackgroundV2 from '@/assets/bg_cyberwow_v2.png';
+import cyberWowLogo from '@/assets/cyberwow-logo.svg';
+---
+
+<div class="strip-v2">
+	<div class="strip-v2__bg" aria-hidden="true">
+		<img src={cyberWowBackgroundV2.src} width="1920" height="70" alt="" />
+	</div>
+
+	<div class="strip-v2__content">
+		<div class="strip-v2__logo">
+			<img src={cyberWowLogo.src} width="117" height="32" alt="Cyber Wow" />
+		</div>
+
+		<p class="strip-v2__label">Empieza en:</p>
+
+		<div id="countdown" class="strip-v2__countdown" aria-label="Tiempo restante">
+			<div class="strip-v2__unit">
+				<span class="strip-v2__digits"><span class="dia_digito1">0</span><span class="dia_digito2">0</span></span>
+				<span class="strip-v2__unit-label">DÍAS</span>
+			</div>
+			<span class="strip-v2__sep" aria-hidden="true">:</span>
+			<div class="strip-v2__unit">
+				<span class="strip-v2__digits"><span class="hora_digito1">0</span><span class="hora_digito2">0</span></span>
+				<span class="strip-v2__unit-label">HORAS</span>
+			</div>
+			<span class="strip-v2__sep" aria-hidden="true">:</span>
+			<div class="strip-v2__unit">
+				<span class="strip-v2__digits"><span class="minuto_digito1">0</span><span class="minuto_digito2">0</span></span>
+				<span class="strip-v2__unit-label">MIN</span>
+			</div>
+			<span class="strip-v2__sep strip-v2__seconds" aria-hidden="true">:</span>
+			<div class="strip-v2__unit strip-v2__seconds">
+				<span class="strip-v2__digits"><span class="segundo_digito1">0</span><span class="segundo_digito2">0</span></span>
+				<span class="strip-v2__unit-label">SEG</span>
+			</div>
+		</div>
+
+		<p class="strip-v2__text">Descuentos en equipos, promos y más del 02 al 05 noviembre.</p>
+		<a href="#" target="_blank" rel="noopener noreferrer" class="strip-v2__btn">Ingresa a tienda Claro</a>
+	</div>
+</div>
