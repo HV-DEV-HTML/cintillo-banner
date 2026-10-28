@@ -1,7 +1,7 @@
 [Plugin:ifInRange from="[PageInfo value='firstItemOnPage']"]
 <!-- Existing project asset reference; all component-critical styles are kept inline below. -->
 <link rel="stylesheet" href="https://www.claro.com.pe/assets/havas/banner_cintillo/_assets/index.BH4JZYC6.css">
-<link rel="stylesheet" href="https://www.claro.com.pe/assets/havas/banner_cintillo/_assets/index.ClZCIw5-.css">
+<link rel="stylesheet" href="https://www.claro.com.pe/assets/havas/banner_cintillo/_assets/index.BM7h_3cu.css">
 <div
   id="banner_cintillo"
   class="promotional-strip"

@@ -662,8 +662,27 @@
     margin-right: 24px;
   }
 
+  /* Campaign (Figma tablet 768x110): logo 145 | text 20px (3 lines, 230) | pill 120x40 */
+  #banner_cintillo[data-design-version="V2"][data-campaign-phase="last-hours"],
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2 {
+    height: 110px;
+  }
+
   #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__logo {
-    margin-right: 24px;
+    width: clamp(100px, 18.9vw, 145px);
+    margin-right: clamp(12px, 3.65vw, 28px);
+  }
+
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__text {
+    flex: 0 1 230px;
+    font-size: clamp(15px, 2.6vw, 20px);
+    -webkit-line-clamp: 3;
+  }
+
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__btn {
+    min-width: 120px;
+    margin-left: clamp(12px, 4.7vw, 36px);
+    font-size: 14px;
   }
 
   #banner_cintillo .strip-v2__text {
@@ -696,10 +715,6 @@
     margin-right: 12px;
   }
 
-  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__logo {
-    margin-right: 12px;
-  }
-
   #banner_cintillo .strip-v2__text {
     flex: 1 1 0;
     min-width: 0;
@@ -714,6 +729,11 @@
     padding: 0 14px;
     border-radius: 18px;
     font-size: 13px;
+  }
+
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__btn {
+    height: 40px;
+    border-radius: 20px;
   }
 
   #banner_cintillo[data-campaign-phase="countdown"] .strip-v2__logo {
@@ -779,14 +799,42 @@
     line-height: 22px;
   }
 
+  /* Campaign (Figma mobile 360x80): logo 81 left | text 13px (3 lines) | pill 100x35 */
+  #banner_cintillo[data-design-version="V2"][data-campaign-phase="last-hours"],
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2 {
+    height: 80px;
+  }
+
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__content {
+    justify-content: flex-start;
+    padding: 0 36px 0 14px;
+  }
+
   #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__logo {
-    display: none;
+    width: 81px;
+    margin-right: 9px;
   }
 
   #banner_cintillo .strip-v2__text {
     font-size: 12px;
     line-height: 1.15;
     -webkit-line-clamp: 3;
+  }
+
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__text {
+    flex: 1 1 0;
+    font-size: 13px;
+    -webkit-line-clamp: 4;
+  }
+
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__btn {
+    min-width: 0;
+    width: 100px;
+    max-width: 100px;
+    height: 35px;
+    margin-left: 9px;
+    border-radius: 18px;
+    font-size: 12px;
   }
 
   #banner_cintillo .strip-v2__btn {
@@ -812,9 +860,35 @@
   }
 }
 
+/* The close button spans the banner height, which grows in the campaign phase. */
+#banner_cintillo[data-design-version="V2"][data-campaign-phase="last-hours"] .closeElement {
+  height: 100%;
+}
+
 /* V2 responsive: very narrow phones drop the seconds. */
 @media screen and (max-width: 374px) {
   #banner_cintillo .strip-v2__seconds {
     display: none;
+  }
+
+  /* Campaign on very narrow phones: tighten logo, gaps and pill so the copy keeps 4 lines. */
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__content {
+    padding: 0 34px 0 10px;
+  }
+
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__logo {
+    width: 64px;
+    margin-right: 8px;
+  }
+
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__text {
+    font-size: 12px;
+  }
+
+  #banner_cintillo[data-campaign-phase="last-hours"] .strip-v2__btn {
+    width: 88px;
+    max-width: 88px;
+    margin-left: 8px;
+    font-size: 11px;
   }
 }
