@@ -1,0 +1,393 @@
+---
+import Layout from '@layouts/Layout.astro';
+
+// Images: served from /public/navidad in dev, from the Claro asset host in the built page
+// (the built HTML at dist/navidad/index.html is what gets pasted into the CMS).
+const IMG = import.meta.env.DEV
+	? '/navidad/'
+	: 'https://www.claro.com.pe/assets/havas/banner_cintillo/navidad/';
+---
+
+<Layout title='Cintillo Banner - Navidad'>
+<!--
+  Cintillo Navidad Claro Perú · fragmento autocontenido para pegar en el CMS (style + markup + script).
+  - Fechas de campaña: data-start (inicio, antes de esa hora queda oculto) y data-end (fin del
+    contador; al llegar se elimina el cintillo). Ambas en ISO 8601 con zona horaria (Perú: -05:00).
+  - Imágenes: subir slide-1..4.png a la carpeta de assets indicada en las URLs del HTML final.
+  - Todo el CSS está bajo #cintillo-navidad y los keyframes llevan prefijo cn-.
+-->
+<style is:inline>
+#cintillo-navidad{--fall:110px;display:block;width:100%;container-type:inline-size;font-family:Roboto,Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased}
+#cintillo-navidad.cn-wait{display:none}
+/* sticky: igual que #banner_cintillo.sticky del cintillo actual */
+#cintillo-navidad.sticky{position:fixed;top:62px;right:0;left:0;z-index:10}
+@media (max-width:820px){#cintillo-navidad.sticky{top:50px}}
+#cintillo-navidad *,#cintillo-navidad *::before,#cintillo-navidad *::after{box-sizing:border-box;margin:0;padding:0;letter-spacing:normal;word-spacing:normal;text-transform:none}
+#cintillo-navidad img{display:block;max-width:none;height:auto;border:0}
+#cintillo-navidad a{text-decoration:none}
+#cintillo-navidad button{font:inherit;border:0;background:none;cursor:pointer;color:inherit}
+
+/* ---------- strip ---------- */
+#cintillo-navidad .cn{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;height:96px;color:#fff;
+  padding:0 max(64px,calc((100% - 1376px) / 2)) 0 max(24px,calc((100% - 1376px) / 2 + 1px));
+  background:
+    radial-gradient(60% 180% at 8% 50%,rgba(255,150,90,.35),transparent 60%),
+    radial-gradient(50% 160% at 62% 100%,rgba(255,120,80,.3),transparent 60%),
+    linear-gradient(100deg,#b9180e 0%,#d42a1d 38%,#e0331f 62%,#c41f13 100%)}
+
+/* ---------- decoración de fondo ---------- */
+#cintillo-navidad .cn-bokeh,#cintillo-navidad .cn-snow{position:absolute;inset:0;pointer-events:none;z-index:0}
+#cintillo-navidad .cn-bokeh i{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,200,110,.5),rgba(255,200,110,0) 70%);animation:cn-drift ease-in-out infinite alternate}
+@keyframes cn-drift{to{transform:translate(var(--x),var(--y)) scale(1.25)}}
+#cintillo-navidad .cn-snow i{position:absolute;top:-10px;opacity:0;font-style:normal;line-height:1;animation:cn-fall linear infinite}
+@keyframes cn-fall{0%{transform:translate(0,-10px);opacity:0}10%,90%{opacity:var(--o)}100%{transform:translate(var(--dx),var(--fall)) rotate(200deg);opacity:0}}
+#cintillo-navidad .cn-edge{position:absolute;left:0;right:0;height:2px;z-index:1;pointer-events:none;background:linear-gradient(90deg,transparent,#ffcf6b,transparent);background-size:40% 100%;background-repeat:no-repeat;animation:cn-edge 5s linear infinite}
+#cintillo-navidad .cn-edge--t{top:0}
+#cintillo-navidad .cn-edge--b{bottom:0;animation-direction:reverse}
+@keyframes cn-edge{from{background-position:-40% 0}to{background-position:140% 0}}
+
+/* ---------- personajes (imagen por slide) ---------- */
+#cintillo-navidad .cn-art{position:relative;flex:none;width:130px;height:96px;margin-right:53.4px;z-index:2}
+#cintillo-navidad .cn-hop{position:absolute;left:0;top:3px;width:130px;height:117px;transform-origin:50% 100%;animation:cn-hop 2.8s ease-in-out infinite}
+@keyframes cn-hop{0%,55%,100%{transform:translateY(0) rotate(0) scale(1)}8%{transform:translateY(1px) scale(1.03,.97)}20%{transform:translateY(-5px) rotate(-2deg) scale(.99,1.02)}32%{transform:translateY(0) rotate(1.5deg) scale(1.02,.98)}42%{transform:rotate(-.5deg)}}
+#cintillo-navidad .cn-pic{position:absolute;inset:0;opacity:0;transition:opacity .5s}
+#cintillo-navidad .cn-pic.is-on{opacity:1}
+#cintillo-navidad .cn-pic img{width:100%;height:100%}
+
+/* ---------- mensajes ---------- */
+#cintillo-navidad .cn-msgs{position:relative;flex:0 1 455px;min-width:0;height:60px;z-index:2}
+#cintillo-navidad .cn-msg{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(16px);filter:blur(4px);pointer-events:none;
+  transition:opacity .55s,transform .6s cubic-bezier(.2,.8,.2,1),filter .55s}
+#cintillo-navidad .cn-msg.is-on{opacity:1;transform:none;filter:none;pointer-events:auto}
+#cintillo-navidad .cn-msg.is-out{opacity:0;transform:translateY(-16px);filter:blur(4px)}
+#cintillo-navidad .cn-msg strong{display:block;font-size:26px;font-weight:700;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#cintillo-navidad .cn-msg small{display:block;margin-top:3px;font-size:15px;font-weight:400;opacity:.95;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#cintillo-navidad .cn-dots{position:absolute;left:0;top:65px;display:flex;gap:6px}
+#cintillo-navidad .cn-dots i{position:relative;overflow:hidden;width:18px;height:3px;border-radius:3px;background:rgba(255,255,255,.3)}
+#cintillo-navidad .cn-dots i.is-on::after{content:"";position:absolute;inset:0;background:#ffc745;transform-origin:left;animation:cn-fill var(--cn-t,4s) linear forwards}
+@keyframes cn-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+#cintillo-navidad .cn.is-paused .cn-dots i.is-on::after{animation-play-state:paused}
+
+/* ---------- copos flotantes ---------- */
+#cintillo-navidad .cn-deco{position:relative;flex:1 1 0;min-width:0;align-self:stretch;z-index:1;pointer-events:none}
+#cintillo-navidad .cn-flk{position:absolute;left:var(--l);top:var(--t);width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);color:rgba(255,255,255,.85);filter:drop-shadow(0 0 6px rgba(255,255,255,.5));animation:cn-flk var(--d) linear infinite}
+#cintillo-navidad .cn-flk.is-g{color:#ffd77a}
+#cintillo-navidad .cn-flk svg{display:block;width:100%;height:100%}
+@keyframes cn-flk{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(180deg)}100%{transform:translateY(0) rotate(360deg)}}
+
+/* ---------- contador ---------- */
+#cintillo-navidad .cn-count{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;z-index:2}
+#cintillo-navidad .cn-count.is-off{display:none}
+#cintillo-navidad .cn-lbl{font-size:11px;font-weight:500;letter-spacing:1.6px;opacity:.9}
+#cintillo-navidad .cn-boxes{display:flex;gap:6px}
+#cintillo-navidad .cn-bx{width:50px;height:50px;border-radius:9px;background:rgba(120,8,4,.45);border:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+#cintillo-navidad .cn-bx b{font-size:22px;font-weight:700;line-height:22px}
+#cintillo-navidad .cn-bx b.cn-tick{animation:cn-tick .4s ease}
+@keyframes cn-tick{0%{transform:translateY(-60%);opacity:0}100%{transform:none;opacity:1}}
+#cintillo-navidad .cn-bx span{margin-top:4px;font-size:9px;letter-spacing:.8px;opacity:.75}
+
+/* ---------- CTA + cerrar ---------- */
+#cintillo-navidad a.cn-cta,#cintillo-navidad a.cn-cta:visited{position:relative;overflow:hidden;flex:none;display:inline-flex;align-items:center;gap:8px;margin-left:22px;height:42px;padding:0 24px;border-radius:999px;
+  background:#fff;color:#da291c;font-size:15px;font-weight:700;white-space:nowrap;box-shadow:0 6px 18px rgba(80,0,0,.28);z-index:2;transition:transform .2s}
+#cintillo-navidad a.cn-cta:hover{transform:translateY(-2px) scale(1.03);color:#da291c}
+#cintillo-navidad .cn-cta::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;transform:skewX(-20deg);background:linear-gradient(100deg,transparent,rgba(255,214,120,.75),transparent);animation:cn-shine 3.2s ease-in-out infinite}
+@keyframes cn-shine{0%,55%{left:-60%}85%,100%{left:130%}}
+#cintillo-navidad .cn-ar{display:inline-block;animation:cn-nudge 1.6s ease-in-out infinite}
+@keyframes cn-nudge{0%,60%,100%{transform:none}30%{transform:translateX(4px)}}
+#cintillo-navidad .cn-close{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;opacity:.85;z-index:3}
+#cintillo-navidad .cn-close:hover{opacity:1}
+#cintillo-navidad .cn-close svg{width:12px;height:12px}
+#cintillo-navidad .cn-cta:focus-visible,#cintillo-navidad .cn-close:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+/* ---------- responsive (por ancho del propio cintillo) ---------- */
+@container (max-width:1319px){
+  #cintillo-navidad .cn-flk{display:none}
+}
+@container (max-width:1199px){
+  #cintillo-navidad .cn-art{width:104px;margin-right:24px}
+  #cintillo-navidad .cn-hop{width:104px;height:94px}
+  #cintillo-navidad .cn-msgs{margin-right:16px}
+  #cintillo-navidad .cn-msg strong{font-size:22px;font-size:clamp(18px,2.05cqw,22px)}
+  #cintillo-navidad .cn-msg small{font-size:13px}
+  #cintillo-navidad .cn-bx{width:44px;height:44px}
+  #cintillo-navidad .cn-bx b{font-size:19px;line-height:19px}
+  #cintillo-navidad .cn-bx span{font-size:8px;margin-top:3px}
+  #cintillo-navidad a.cn-cta{font-size:14px;padding:0 18px;margin-left:16px}
+}
+@container (max-width:959px){
+  #cintillo-navidad .cn{padding:0 44px 0 20px}
+  #cintillo-navidad .cn-art{width:72px;margin-right:10px}
+  #cintillo-navidad .cn-hop{width:72px;height:65px}
+  #cintillo-navidad .cn-msgs{margin-right:12px}
+  #cintillo-navidad .cn-msg strong{font-size:17px}
+  #cintillo-navidad .cn-msg small{display:none}
+  #cintillo-navidad .cn-dots{top:46px}
+  #cintillo-navidad .cn-lbl{display:none}
+  #cintillo-navidad .cn-boxes{gap:4px}
+  #cintillo-navidad .cn-bx{width:36px;height:36px;border-radius:7px}
+  #cintillo-navidad .cn-bx b{font-size:17px;line-height:17px}
+  #cintillo-navidad .cn-bx span{font-size:7px;margin-top:2px}
+  #cintillo-navidad a.cn-cta{height:36px;font-size:13px;padding:0 14px;margin-left:12px}
+  #cintillo-navidad .cn-close{right:8px}
+}
+@container (max-width:768px){
+  #cintillo-navidad .cn{--fall:70px;display:block;height:56px;padding:0}
+  #cintillo-navidad .cn-art{position:absolute;left:6px;top:2px;width:58px;height:52px;margin:0}
+  #cintillo-navidad .cn-hop{top:0;width:57.65px;height:52px}
+  #cintillo-navidad .cn-msgs{position:absolute;left:72px;top:8px;right:30px;height:16px;margin:0}
+  #cintillo-navidad .cn-msg{justify-content:flex-start}
+  #cintillo-navidad .cn-msg strong{font-size:12.96px}
+  #cintillo-navidad .cn-msg small,#cintillo-navidad .cn-dots,#cintillo-navidad .cn-count,#cintillo-navidad .cn-deco{display:none}
+  #cintillo-navidad a.cn-cta{position:absolute;left:72px;top:28px;height:21px;margin:0;padding:0 12px;font-size:11px;box-shadow:0 3px 10px rgba(80,0,0,.25)}
+  #cintillo-navidad .cn-close{right:2px;top:15px;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  #cintillo-navidad *,#cintillo-navidad *::before,#cintillo-navidad *::after{animation:none!important;transition:none!important}
+}
+</style>
+
+<div id="cintillo-navidad" data-start="2026-11-16T00:00:00-05:00" data-end="2026-12-25T23:59:59-05:00" lang="es">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="cn-flake" viewBox="0 0 40 40">
+      <g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none">
+        <path d="M20 20V3M20 9l-4-4M20 9l4-4M20 15l-3-3M20 15l3-3"/>
+        <path transform="rotate(60 20 20)" d="M20 20V3M20 9l-4-4M20 9l4-4M20 15l-3-3M20 15l3-3"/>
+        <path transform="rotate(120 20 20)" d="M20 20V3M20 9l-4-4M20 9l4-4M20 15l-3-3M20 15l3-3"/>
+        <path transform="rotate(180 20 20)" d="M20 20V3M20 9l-4-4M20 9l4-4M20 15l-3-3M20 15l3-3"/>
+        <path transform="rotate(240 20 20)" d="M20 20V3M20 9l-4-4M20 9l4-4M20 15l-3-3M20 15l3-3"/>
+        <path transform="rotate(300 20 20)" d="M20 20V3M20 9l-4-4M20 9l4-4M20 15l-3-3M20 15l3-3"/>
+      </g>
+      <circle cx="20" cy="20" r="2.6" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <section class="cn" role="region" aria-label="Promociones de Navidad Claro">
+    <div class="cn-bokeh" aria-hidden="true"></div>
+    <div class="cn-snow" aria-hidden="true"></div>
+    <i class="cn-edge cn-edge--t" aria-hidden="true"></i>
+    <i class="cn-edge cn-edge--b" aria-hidden="true"></i>
+
+    <div class="cn-art" aria-hidden="true">
+      <div class="cn-hop">
+        <div class="cn-pic is-on"><img src={`${IMG}slide-1.png`} width="130" height="117" alt="" decoding="async"></div>
+        <div class="cn-pic"><img src={`${IMG}slide-2.png`} width="130" height="117" alt="" decoding="async"></div>
+        <div class="cn-pic"><img src={`${IMG}slide-3.png`} width="130" height="117" alt="" decoding="async"></div>
+        <div class="cn-pic"><img src={`${IMG}slide-4.png`} width="130" height="117" alt="" decoding="async"></div>
+      </div>
+    </div>
+
+    <div class="cn-msgs" aria-live="off">
+      <div class="cn-msg is-on"><strong>Fibra óptica, postpago y prepago</strong><small>Promos navideñas para todos tus servicios.</small></div>
+      <div class="cn-msg" aria-hidden="true"><strong>Descuentos en equipos, promos y más</strong><small>Del 13 de noviembre al 25 de diciembre.</small></div>
+      <div class="cn-msg" aria-hidden="true"><strong>Hasta S/400 de descuento en equipos</strong><small>Precios especiales Full Claro - Tienda Claro.</small></div>
+      <div class="cn-msg" aria-hidden="true"><strong>Hogar + Móvil = Full Claro</strong><small>Hasta 50% más gigas y hasta 1000 Mbps en casa.</small></div>
+      <div class="cn-dots" aria-hidden="true"><i class="is-on"></i><i></i><i></i><i></i></div>
+    </div>
+
+    <div class="cn-deco" aria-hidden="true">
+      <span class="cn-flk" style="--l:16.7%;--t:62%;--s:22px;--d:12s;animation-delay:-1.3s"><svg viewBox="0 0 40 40"><use href="#cn-flake"/></svg></span>
+      <span class="cn-flk is-g" style="--l:30.9%;--t:28%;--s:12px;--d:9s;animation-delay:-2.6s"><svg viewBox="0 0 40 40"><use href="#cn-flake"/></svg></span>
+      <span class="cn-flk is-g" style="--l:46.7%;--t:60%;--s:28px;--d:15s;animation-delay:-3.9s"><svg viewBox="0 0 40 40"><use href="#cn-flake"/></svg></span>
+      <span class="cn-flk" style="--l:61.7%;--t:26%;--s:13px;--d:10s;animation-delay:-5.2s"><svg viewBox="0 0 40 40"><use href="#cn-flake"/></svg></span>
+      <span class="cn-flk" style="--l:75.9%;--t:64%;--s:20px;--d:11s;animation-delay:-6.5s"><svg viewBox="0 0 40 40"><use href="#cn-flake"/></svg></span>
+      <span class="cn-flk is-g" style="--l:87.9%;--t:30%;--s:11px;--d:8s;animation-delay:-7.8s"><svg viewBox="0 0 40 40"><use href="#cn-flake"/></svg></span>
+    </div>
+
+    <div class="cn-count" role="timer" aria-label="Tiempo restante de la promoción">
+      <span class="cn-lbl">TERMINA EN</span>
+      <div class="cn-boxes">
+        <div class="cn-bx"><b data-u="d">00</b><span>DÍAS</span></div>
+        <div class="cn-bx"><b data-u="h">00</b><span>HRS</span></div>
+        <div class="cn-bx"><b data-u="m">00</b><span>MIN</span></div>
+        <div class="cn-bx"><b data-u="s">00</b><span>SEG</span></div>
+      </div>
+    </div>
+
+    <a class="cn-cta" href="https://tienda.claro.com.pe/" target="_blank" rel="noopener">Ir a Tienda Claro <span class="cn-ar" aria-hidden="true">→</span></a>
+
+    <button type="button" class="cn-close" aria-label="Cerrar">
+      <svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11"/></svg>
+    </button>
+  </section>
+</div>
+
+<script is:inline>
+(function run() {
+  var root = document.getElementById('cintillo-navidad');
+  if (!root || root.getAttribute('data-cn-init')) return;
+
+  /* inicio de campaña: si data-start es futura, queda oculto y reintenta hasta esa hora */
+  var start = new Date(root.getAttribute('data-start')).getTime();
+  var wait = start - Date.now();
+  if (!isNaN(start) && wait > 0) {
+    root.classList.add('cn-wait');
+    setTimeout(run, Math.min(wait, 60000));
+    return;
+  }
+  root.classList.remove('cn-wait');
+  root.setAttribute('data-cn-init', '1');
+
+  var strip = root.querySelector('.cn');
+  var msgs = [].slice.call(root.querySelectorAll('.cn-msg'));
+  var pics = [].slice.call(root.querySelectorAll('.cn-pic'));
+  var dots = [].slice.call(root.querySelectorAll('.cn-dots i'));
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var small = root.clientWidth <= 768;
+  var delay = reduce ? 6000 : 4000;
+  var cur = 0, timer = null, clock = null;
+  var hover = false, focus = false, hidden = document.hidden, paused = false;
+
+  function R(a, b) { return a + Math.random() * (b - a); }
+
+  /* ---- partículas decorativas ---- */
+  var snow = root.querySelector('.cn-snow');
+  var bokeh = root.querySelector('.cn-bokeh');
+  var glyphs = ['❄', '✦', '•', '❅', '✧'];
+  var nSnow = reduce ? 0 : (small ? 10 : 26);
+  var nBokeh = small ? 6 : 14;
+  var i, e, s;
+  for (i = 0; i < nSnow; i++) {
+    e = document.createElement('i');
+    e.textContent = glyphs[i % 5];
+    e.style.left = R(0, 100) + '%';
+    e.style.fontSize = R(7, 14) + 'px';
+    e.style.setProperty('--o', R(0.35, 0.85).toFixed(2));
+    e.style.setProperty('--dx', R(-30, 30) + 'px');
+    e.style.animationDuration = R(4, 9) + 's';
+    e.style.animationDelay = (-R(0, 9)) + 's';
+    snow.appendChild(e);
+  }
+  for (i = 0; i < nBokeh; i++) {
+    e = document.createElement('i');
+    s = R(30, 110);
+    e.style.width = s + 'px';
+    e.style.height = s + 'px';
+    e.style.left = R(-5, 100) + '%';
+    e.style.top = R(-40, 70) + '%';
+    e.style.opacity = R(0.25, 0.7).toFixed(2);
+    e.style.animationDuration = R(5, 11) + 's';
+    e.style.animationDelay = (-R(0, 10)) + 's';
+    e.style.setProperty('--x', R(-40, 40) + 'px');
+    e.style.setProperty('--y', R(-15, 15) + 'px');
+    bokeh.appendChild(e);
+  }
+
+  /* ---- carrusel de mensajes + imagen ---- */
+  root.style.setProperty('--cn-t', delay + 'ms');
+
+  function restartDot() {
+    var d = dots[cur];
+    if (!d) return;
+    d.classList.remove('is-on');
+    void d.offsetWidth;
+    d.classList.add('is-on');
+  }
+
+  function show(n) {
+    var prev = cur;
+    msgs.forEach(function (m, k) {
+      m.classList.remove('is-on', 'is-out');
+      m.setAttribute('aria-hidden', k === n ? 'false' : 'true');
+    });
+    pics.forEach(function (p, k) { p.classList.toggle('is-on', k === n); });
+    if (prev !== n) msgs[prev].classList.add('is-out');
+    msgs[n].classList.add('is-on');
+    dots.forEach(function (d) { d.classList.remove('is-on'); });
+    void strip.offsetWidth;
+    if (dots[n]) dots[n].classList.add('is-on');
+    cur = n;
+  }
+
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      show((cur + 1) % msgs.length);
+      schedule();
+    }, delay);
+  }
+
+  function sync() {
+    var wantPause = hover || focus || hidden;
+    if (wantPause && !paused) {
+      paused = true;
+      clearTimeout(timer);
+      strip.classList.add('is-paused');
+    } else if (!wantPause && paused) {
+      paused = false;
+      strip.classList.remove('is-paused');
+      restartDot();
+      schedule();
+    }
+  }
+
+  strip.addEventListener('mouseenter', function () { hover = true; sync(); });
+  strip.addEventListener('mouseleave', function () { hover = false; sync(); });
+  strip.addEventListener('focusin', function () { focus = true; sync(); });
+  strip.addEventListener('focusout', function () { focus = false; sync(); });
+  function onVisibility() { hidden = document.hidden; sync(); }
+  document.addEventListener('visibilitychange', onVisibility);
+
+  /* ---- sticky: igual que el cintillo actual (>100px en desktop, >70px en mobile) ---- */
+  var mobileMq = window.matchMedia('(max-width: 768px)');
+  function onScroll() {
+    root.classList.toggle('sticky', window.scrollY > (mobileMq.matches ? 70 : 100));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---- contador ---- */
+  var end = new Date(root.getAttribute('data-end')).getTime();
+  var nodes = [].slice.call(root.querySelectorAll('[data-u]'));
+  var countEl = root.querySelector('.cn-count');
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  function teardown() {
+    clearTimeout(timer);
+    clearInterval(clock);
+    document.removeEventListener('visibilitychange', onVisibility);
+    window.removeEventListener('scroll', onScroll);
+    if (root.parentNode) root.parentNode.removeChild(root);
+  }
+
+  function tick() {
+    var t = end - Date.now();
+    if (t <= 0) { teardown(); return; }
+    var sec = Math.floor(t / 1000);
+    var v = {
+      d: Math.floor(sec / 86400),
+      h: Math.floor((sec % 86400) / 3600),
+      m: Math.floor((sec % 3600) / 60),
+      s: sec % 60
+    };
+    nodes.forEach(function (el) {
+      var nv = pad(v[el.getAttribute('data-u')]);
+      if (el.textContent !== nv) {
+        el.textContent = nv;
+        el.classList.remove('cn-tick');
+        void el.offsetWidth;
+        el.classList.add('cn-tick');
+      }
+    });
+  }
+
+  if (isNaN(end)) {
+    if (countEl) countEl.classList.add('is-off');
+  } else {
+    tick();
+    if (!root.parentNode) return;
+    clock = setInterval(tick, 1000);
+  }
+
+  root.querySelector('.cn-close').addEventListener('click', teardown);
+
+  /* utilidad de verificación: forzar un slide */
+  root.cnShow = function (n) {
+    show(n);
+    if (!paused) schedule();
+  };
+
+  show(0);
+  if (!hidden) schedule(); else paused = true;
+})();
+</script>
+</Layout>
