@@ -135,14 +135,20 @@ const IMG = import.meta.env.DEV
 @media (max-width:767px){
   #cintillo-navidad .cn{--fall:70px;height:56px}
   #cintillo-navidad .cn-in{display:block;padding:0}
-  #cintillo-navidad .cn-art{position:absolute;left:6px;top:2px;width:58px;height:52px;margin:0}
+  #cintillo-navidad .cn-art{position:absolute;left:16px;top:2px;width:58px;height:52px;margin:0}
   #cintillo-navidad .cn-hop{top:0;width:57.65px;height:52px}
-  #cintillo-navidad .cn-msgs{position:absolute;left:72px;top:8px;right:30px;height:16px;margin:0}
-  #cintillo-navidad .cn-msg{justify-content:flex-start}
-  #cintillo-navidad .cn-msg strong{font-size:12.96px}
+  #cintillo-navidad .cn-msgs{position:absolute;left:78px;top:13px;right:153px;height:30px;margin:0}
+  #cintillo-navidad .cn-msg{justify-content:center}
+  #cintillo-navidad .cn-msg strong{font-size:12.96px;line-height:15px;white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;text-wrap:balance}
   #cintillo-navidad .cn-msg small,#cintillo-navidad .cn-dots,#cintillo-navidad .cn-count,#cintillo-navidad .cn-deco{display:none}
-  #cintillo-navidad a.cn-cta{position:absolute;left:72px;top:28px;height:21px;margin:0;padding:0 12px;font-size:11px;box-shadow:0 1px 3px rgba(80,0,0,.2)}
+  #cintillo-navidad a.cn-cta{position:absolute;right:39px;top:15px;height:27px;margin:0;padding:0 12px;font-size:11px;box-shadow:0 3px 10px rgba(80,0,0,.25)}
+  #cintillo-navidad .cn-cta .cn-ar{display:none}
   #cintillo-navidad .cn-close{right:2px;top:15px}
+}
+@media (max-width:359px){
+  #cintillo-navidad .cn-msgs{left:68px;right:143px}
+  #cintillo-navidad .cn-msg strong{font-size:10.5px;line-height:13px}
+  #cintillo-navidad a.cn-cta{right:36px;padding:0 9px}
 }
 @media (prefers-reduced-motion:reduce){
   #cintillo-navidad *,#cintillo-navidad *::before,#cintillo-navidad *::after{animation:none!important;transition:none!important}
